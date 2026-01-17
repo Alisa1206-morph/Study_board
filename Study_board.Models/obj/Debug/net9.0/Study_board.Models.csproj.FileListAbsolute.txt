@@ -1,0 +1,11 @@
+/Users/admin/Study_board/Study_board.Models/bin/Debug/net9.0/Study_board.Models.deps.json
+/Users/admin/Study_board/Study_board.Models/bin/Debug/net9.0/Study_board.Models.dll
+/Users/admin/Study_board/Study_board.Models/bin/Debug/net9.0/Study_board.Models.pdb
+/Users/admin/Study_board/Study_board.Models/obj/Debug/net9.0/Study_board.Models.GeneratedMSBuildEditorConfig.editorconfig
+/Users/admin/Study_board/Study_board.Models/obj/Debug/net9.0/Study_board.Models.AssemblyInfoInputs.cache
+/Users/admin/Study_board/Study_board.Models/obj/Debug/net9.0/Study_board.Models.AssemblyInfo.cs
+/Users/admin/Study_board/Study_board.Models/obj/Debug/net9.0/Study_board.Models.csproj.CoreCompileInputs.cache
+/Users/admin/Study_board/Study_board.Models/obj/Debug/net9.0/Study_board.Models.dll
+/Users/admin/Study_board/Study_board.Models/obj/Debug/net9.0/refint/Study_board.Models.dll
+/Users/admin/Study_board/Study_board.Models/obj/Debug/net9.0/Study_board.Models.pdb
+/Users/admin/Study_board/Study_board.Models/obj/Debug/net9.0/ref/Study_board.Models.dll

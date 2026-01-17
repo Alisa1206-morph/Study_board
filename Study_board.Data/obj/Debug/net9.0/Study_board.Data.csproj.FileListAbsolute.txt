@@ -1,0 +1,17 @@
+/Users/admin/Study_board/Study_board.Data/bin/Debug/net9.0/Study_board.Data.deps.json
+/Users/admin/Study_board/Study_board.Data/bin/Debug/net9.0/Study_board.Data.runtimeconfig.json
+/Users/admin/Study_board/Study_board.Data/bin/Debug/net9.0/Study_board.Data.dll
+/Users/admin/Study_board/Study_board.Data/bin/Debug/net9.0/Study_board.Data.pdb
+/Users/admin/Study_board/Study_board.Data/obj/Debug/net9.0/Study_board.Data.csproj.AssemblyReference.cache
+/Users/admin/Study_board/Study_board.Data/obj/Debug/net9.0/Study_board.Data.GeneratedMSBuildEditorConfig.editorconfig
+/Users/admin/Study_board/Study_board.Data/obj/Debug/net9.0/Study_board.Data.AssemblyInfoInputs.cache
+/Users/admin/Study_board/Study_board.Data/obj/Debug/net9.0/Study_board.Data.AssemblyInfo.cs
+/Users/admin/Study_board/Study_board.Data/obj/Debug/net9.0/Study_board.Data.csproj.CoreCompileInputs.cache
+/Users/admin/Study_board/Study_board.Data/obj/Debug/net9.0/Study_board.Data.dll
+/Users/admin/Study_board/Study_board.Data/obj/Debug/net9.0/refint/Study_board.Data.dll
+/Users/admin/Study_board/Study_board.Data/obj/Debug/net9.0/Study_board.Data.pdb
+/Users/admin/Study_board/Study_board.Data/obj/Debug/net9.0/Study_board.Data.genruntimeconfig.cache
+/Users/admin/Study_board/Study_board.Data/obj/Debug/net9.0/ref/Study_board.Data.dll
+/Users/admin/Study_board/Study_board.Data/bin/Debug/net9.0/Study_board.Models.dll
+/Users/admin/Study_board/Study_board.Data/bin/Debug/net9.0/Study_board.Models.pdb
+/Users/admin/Study_board/Study_board.Data/obj/Debug/net9.0/Study_bo.F666401C.Up2Date

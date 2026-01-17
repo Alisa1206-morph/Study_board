@@ -1,0 +1,17 @@
+/Users/admin/Study_board/Study_board.Business/bin/Debug/net9.0/Study_board.Business.deps.json
+/Users/admin/Study_board/Study_board.Business/bin/Debug/net9.0/Study_board.Business.dll
+/Users/admin/Study_board/Study_board.Business/bin/Debug/net9.0/Study_board.Business.pdb
+/Users/admin/Study_board/Study_board.Business/bin/Debug/net9.0/Study_board.Data.dll
+/Users/admin/Study_board/Study_board.Business/bin/Debug/net9.0/Study_board.Models.dll
+/Users/admin/Study_board/Study_board.Business/bin/Debug/net9.0/Study_board.Data.pdb
+/Users/admin/Study_board/Study_board.Business/bin/Debug/net9.0/Study_board.Models.pdb
+/Users/admin/Study_board/Study_board.Business/obj/Debug/net9.0/Study_board.Business.csproj.AssemblyReference.cache
+/Users/admin/Study_board/Study_board.Business/obj/Debug/net9.0/Study_board.Business.GeneratedMSBuildEditorConfig.editorconfig
+/Users/admin/Study_board/Study_board.Business/obj/Debug/net9.0/Study_board.Business.AssemblyInfoInputs.cache
+/Users/admin/Study_board/Study_board.Business/obj/Debug/net9.0/Study_board.Business.AssemblyInfo.cs
+/Users/admin/Study_board/Study_board.Business/obj/Debug/net9.0/Study_board.Business.csproj.CoreCompileInputs.cache
+/Users/admin/Study_board/Study_board.Business/obj/Debug/net9.0/Study_bo.B3C1F114.Up2Date
+/Users/admin/Study_board/Study_board.Business/obj/Debug/net9.0/Study_board.Business.dll
+/Users/admin/Study_board/Study_board.Business/obj/Debug/net9.0/refint/Study_board.Business.dll
+/Users/admin/Study_board/Study_board.Business/obj/Debug/net9.0/Study_board.Business.pdb
+/Users/admin/Study_board/Study_board.Business/obj/Debug/net9.0/ref/Study_board.Business.dll
