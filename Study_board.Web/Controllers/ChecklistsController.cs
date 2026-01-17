@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Study_board.Business.Services.Interfaces;
 using Study_board.Models.ViewModels.Projects;
 using Study_board.Models.Domain.Entities;
-using Study_board.Data.Persistence;
+using Study_board.Data;
 using Study_board.Models.ViewModels.Checklists;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 
@@ -90,7 +89,7 @@ namespace Study_board.Web.Controllers
                 var existing = await _checklistService.GetByIdAsync(id);
                 if (existing != null)
                 {
-                    checklist.ExistingImages = existing.Images?.ToList() ?? new List<ChecklistImageViewModel>();
+                    checklist.Image = existing.Image;
                 }
                 try
                 {

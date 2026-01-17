@@ -15,3 +15,4 @@
 /Users/admin/Study_board/Study_board.Business/obj/Debug/net9.0/refint/Study_board.Business.dll
 /Users/admin/Study_board/Study_board.Business/obj/Debug/net9.0/Study_board.Business.pdb
 /Users/admin/Study_board/Study_board.Business/obj/Debug/net9.0/ref/Study_board.Business.dll
+/Users/admin/Study_board/Study_board.Business/obj/Debug/net9.0/Study_board.Business.sourcelink.json

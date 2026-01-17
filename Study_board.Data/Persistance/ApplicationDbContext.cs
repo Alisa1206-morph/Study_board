@@ -17,45 +17,28 @@ namespace Study_board.Data
         public DbSet<Project> Projects { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
+        {
+            base.OnModelCreating(modelBuilder);
 
-        // Checklist -> Image
+        // Checklist -> Image relationship
         modelBuilder.Entity<Checklist>()
-            .HasOne(r => r.Images)
-            .WithOne(c => c.Checklist)
-            .HasForeignKey(i => i.ChecklistId)
-            .OnDelete(DeleteBehavior.Cascade);
-
-        // Checklist -> Projects
-        modelBuilder.Entity<Checklist>()
-            .HasMany(r => r.Projects)
-            .WithOne(c => c.Checklist)
-            .HasForeignKey(m => m.ChecklistId)
+            .HasOne(c => c.Image)
+            .WithOne(i => i.Checklist)
+            .HasForeignKey<ChecklistImage>(i => i.ChecklistId)
             .OnDelete(DeleteBehavior.Cascade);
 
         // Project configuration
         modelBuilder.Entity<Project>(entity =>
         {
             entity.Property(p => p.Name)
-                .HasMaxLength(200)
+                .HasMaxLength(100)
                 .IsRequired();
 
             entity.Property(p => p.Description)
                 .HasMaxLength(500);
 
-            entity.Property(p => p.DueDate);
-
-            entity.Property(p => p.IsCompleted);
-
             entity.Property(p => p.Type)
                 .IsRequired();
-
-            entity.HasIndex(p => new { p.ChecklistId, p.Title });
-            entity.Property(p => p.ActiveFrom)
-                .IsRequired();
-
-            // ActiveTo is optional by design
         });
     }
 }

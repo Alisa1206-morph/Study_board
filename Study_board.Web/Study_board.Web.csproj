@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../Study_board.Business/Study_board.Business.csproj" />
     <ProjectReference Include="../Study_board.Data/Study_board.Data.csproj" />
+    <ProjectReference Include="../Study_board.Business/Study_board.Business.csproj" />
   </ItemGroup>
 
 </Project>

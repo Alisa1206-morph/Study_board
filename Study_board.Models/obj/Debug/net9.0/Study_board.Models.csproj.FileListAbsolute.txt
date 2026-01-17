@@ -9,3 +9,5 @@
 /Users/admin/Study_board/Study_board.Models/obj/Debug/net9.0/refint/Study_board.Models.dll
 /Users/admin/Study_board/Study_board.Models/obj/Debug/net9.0/Study_board.Models.pdb
 /Users/admin/Study_board/Study_board.Models/obj/Debug/net9.0/ref/Study_board.Models.dll
+/Users/admin/Study_board/Study_board.Models/obj/Debug/net9.0/Study_board.Models.csproj.AssemblyReference.cache
+/Users/admin/Study_board/Study_board.Models/obj/Debug/net9.0/Study_board.Models.sourcelink.json
