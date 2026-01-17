@@ -18,25 +18,25 @@ namespace Study_board.Business.Services.Interfaces
         /// Retrieves all checklists.
         /// </summary>
         /// <returns>A collection of <see cref="ChecklistViewModel"/> objects.</returns>
-        Task<IEnumerable<ChecklistViewModel>> GetAllChecklistsAsync();
+        Task<IEnumerable<ChecklistViewModel>> GetAllAsync();
         /// <summary>
         /// Retrieves a checklist by its ID.
         /// </summary>
         /// <param name="id">The unique identifier of the checklist.</param>
         /// <returns>A <see cref="ChecklistViewModel"/> object if found;if not found, <see langword="null"/>.</returns>
-        Task<ChecklistViewModel?> GetChecklistByIdAsync(Guid id);
+        Task<ChecklistViewModel?> GetByIdAsync(Guid id);
         /// <summary>
         /// Retrieves checklists by title.
         /// </summary>
         /// <param name="title">The title of the checklist.</param>
         /// <returns>A collection of <see cref="ChecklistViewModel"/> objects matching the title.</returns>
-        Task<IEnumerable<ChecklistViewModel>> GetChecklistsByTitleAsync(string title);
+        Task<IEnumerable<ChecklistViewModel>> GetByTitleAsync(string title);
         /// <summary>
         /// Creates a new checklist.
         /// </summary>
         /// <param name="model">The data transfer object containing the checklist details to create.</param>
         /// <returns>The created <see cref="ChecklistViewModel"/>.</returns>
-        Task<ChecklistViewModel> CreateChecklistAsync(ChecklistCreateOrEditViewModel viewModel);
+        Task<ChecklistViewModel> CreateAsync(ChecklistCreateOrEditViewModel viewModel);
         /// <summary>
         /// Updates an existing checklist.
         /// </summary>
@@ -44,13 +44,13 @@ namespace Study_board.Business.Services.Interfaces
         /// <param name="model">The updated checklist data.</param>
         /// <returns>The updated <see cref="ChecklistViewModel"/>.</returns>
         /// <exception cref="KeyNotFoundException">Thrown when the checklist with the provided <paramref name="id"/> is not found.</exception>
-        Task<ChecklistViewModel> UpdateChecklistAsync(Guid id, ChecklistCreateOrEditViewModel viewModel);
-        Task<bool> DeleteChecklistAsync(Guid id);
+        Task<ChecklistViewModel> UpdateAsync(Guid id, ChecklistCreateOrEditViewModel viewModel);
+        Task<bool> DeleteAsync(Guid id);
         /// <summary>
         /// Retrieves checklists by user ID.
         /// </summary>
         /// <param name="userId">The unique identifier of the user.</param>
         /// <returns>A collection of checklists associated with the user.</returns>
-        Task<IEnumerable<ChecklistViewModel>> GetChecklistsByUserIdAsync(Guid userId);
+        Task<IEnumerable<ChecklistViewModel>> GetByUserIdAsync(Guid userId);
     }
 }

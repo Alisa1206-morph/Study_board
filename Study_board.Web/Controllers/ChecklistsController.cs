@@ -62,7 +62,7 @@ namespace Study_board.Web.Controllers
                 await _checklistService.CreateAsync(checklist);
                 return RedirectToAction(nameof(Index));
             }
-            return View(model);
+            return View(checklist);
         }
 
         public async Task<IActionResult> Edit(Guid? id)

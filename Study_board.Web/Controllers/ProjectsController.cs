@@ -57,7 +57,7 @@ namespace Study_board.Web.Controllers
                 await _projectService.CreateAsync(project);
                 return RedirectToAction(nameof(Index));
             }
-            return View(model);
+            return View(project);
         }
 
         public async Task<IActionResult> Edit(Guid? id)
