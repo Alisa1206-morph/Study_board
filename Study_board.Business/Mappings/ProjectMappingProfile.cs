@@ -1,7 +1,6 @@
 using AutoMapper;
 using Study_board.Models.Domain.Entities;
-using Study_board.Models.ViewModels.Projects.ProjectViewModel;
-using Study_board.Models.ViewModels.Projects.ProjectCreateOrEditViewModel;
+using Study_board.Models.ViewModels.Projects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +17,7 @@ namespace Study_board.Business.Mappings
         public ProjectMappingProfile()
         {
             CreateMap<Project, ProjectViewModel>()
-                .ForMember(m => m.Checklist.Title, opt => opt.MapFrom(src => src.Checklist.Title));
+                .ForMember(m => m.Name, opt => opt.MapFrom(src => src.Name));
             CreateMap<ProjectCreateOrEditViewModel, Project>();
         }
     }

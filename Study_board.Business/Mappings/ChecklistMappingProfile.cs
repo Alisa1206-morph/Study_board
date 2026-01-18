@@ -1,7 +1,6 @@
 using AutoMapper;
 using Study_board.Models.Domain.Entities;
-using Study_board.Models.ViewModels.Checklists.ChecklistViewModel;
-using Study_board.Models.ViewModels.Checklists.ChecklistCreateOrEditViewModel;
+using Study_board.Models.ViewModels.Checklists;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,13 +20,13 @@ namespace Study_board.Business.Mappings
 
             CreateMap<ChecklistCreateOrEditViewModel, Checklist>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
-                .ForMember(dest => dest.Images, opt => opt.Ignore());
+                .ForMember(dest => dest.Image, opt => opt.Ignore());
 
             CreateMap<ChecklistImage, ChecklistImageViewModel>();
 
             CreateMap<ChecklistViewModel, ChecklistCreateOrEditViewModel>()
-                .ForMember(dest => dest.ExistingImages, opt => opt.MapFrom(src => src.Images))
-                .ForMember(dest => dest.Images, opt => opt.Ignore());
+                .ForMember(dest => dest.ExistingImage, opt => opt.MapFrom(src => src.Images))
+                .ForMember(dest => dest.Image, opt => opt.Ignore());
         }
     }
 }
