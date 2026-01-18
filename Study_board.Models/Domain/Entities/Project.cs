@@ -44,5 +44,15 @@ namespace Study_board.Models.Domain.Entities
         /// Gets or sets the type of the project (Homework, Presentation, ScienceProject, BigEssay, SmallEssay).
         /// </summary>
         public ProjectType Type { get; set; } = ProjectType.Homework;
+
+        /// <summary>
+        /// Gets or sets the ID of the checklist this project belongs to.
+        /// </summary>
+        public Guid ChecklistId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the checklist this project belongs to.
+        /// </summary>
+        public virtual Checklist? Checklist { get; set; }
     }
 }

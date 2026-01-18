@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Study_board.Models.Domain.Entities;
 
-namespace Study_board.Models.ViewModels.Checklists.ChecklistViewModel
+namespace Study_board.Models.ViewModels.Checklists
 {
     /// <summary>
     /// Represents the data returned when retrieving checklist

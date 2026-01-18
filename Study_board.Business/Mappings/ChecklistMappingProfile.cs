@@ -1,6 +1,5 @@
 using AutoMapper;
 using Study_board.Models.Domain.Entities;
-using Study_board.Models.ViewModels.Checklists.ChecklistViewModel;
 using Study_board.Models.ViewModels.Checklists;
 using System;
 using System.Collections.Generic;

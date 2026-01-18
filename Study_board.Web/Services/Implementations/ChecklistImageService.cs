@@ -1,4 +1,4 @@
-using Study_board.Business.Services.Interfaces;
+using Study_board.Web.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using System;
@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
-namespace Study_board.Business.Services.Implementations
+namespace Study_board.Web.Services.Implementations
 {
     public class ChecklistImageService : IChecklistImageService
     {
@@ -15,7 +16,7 @@ namespace Study_board.Business.Services.Implementations
 
         private readonly string[] _allowedExtensions = { ".jpg", ".jpeg", ".png" };
 
-        public ImageService(IWebHostEnvironment webHostEnvironment)
+        public ChecklistImageService(IWebHostEnvironment webHostEnvironment)
         {
             _webHostEnvironment = webHostEnvironment;
         }

@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Study_board.Business.Services.Interfaces
+namespace Study_board.Web.Services
 {
     /// <summary>
     /// Defines a service for handling file system operations related to images.
     /// This service abstracts the logic for saving and deleting files from the server's web root directory.
     /// </summary>
-    public interface IImageService
+    public interface IChecklistImageService
     {
         /// <summary>
         /// Asynchronously saves an image to the wwwroot folder

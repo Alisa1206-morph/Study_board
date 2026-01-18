@@ -55,9 +55,9 @@
               "target": "Package",
               "version": "[16.0.0, )"
             },
-            "Microsoft.AspNetCore.Hosting": {
+            "Microsoft.Extensions.Hosting.Abstractions": {
               "target": "Package",
-              "version": "[2.3.9, )"
+              "version": "[9.0.0, )"
             }
           },
           "imports": [

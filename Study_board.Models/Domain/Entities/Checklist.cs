@@ -26,6 +26,11 @@ namespace Study_board.Models.Domain.Entities
         public string Title { get; set; } = string.Empty;
 
         /// <summary>
+        /// Gets or sets the user ID who owns this checklist.
+        /// </summary>
+        public Guid UserId { get; set; }
+
+        /// <summary>
         /// Gets or sets the list of projects associated with this checklist.
         /// </summary>
         public List<string> Projects { get; set; } = new List<string>();
