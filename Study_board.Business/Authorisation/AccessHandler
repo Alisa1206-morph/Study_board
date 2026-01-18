@@ -1,0 +1,58 @@
+﻿using Study_board.Business.Authorization.Requirements;
+using Study_board.Business.Repositories.Interfaces;
+using Study_board.Models.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Study_board.Business.Authorization.Handlers
+{
+    public class ManagementAccessHandler : AuthorizationHandler<ManagementAccessRequirement, Guid>
+    {
+        private readonly IRepository<Board> _boardRepository;
+
+        public ManagementAccessHandler(IRepository<Board> boardRepository)
+        {
+            _boardRepository = boardRepository;
+        }
+
+        protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, ManagementAccessRequirement requirement, Guid boardId)
+        {
+            string? userId = context.User
+                .FindFirstValue(ClaimTypes.NameIdentifier);
+            IEnumerable<string> roles = context.User
+                .FindAll(ClaimTypes.Role)
+                .Select(r => r.Value);
+
+            if(roles.Contains("Admin"))
+            {
+                context.Succeed(requirement);
+                return;
+            }
+
+            if(roles.Contains("User"))
+            {
+                Board? board = await _restaurantRepository
+                    .Query()
+                    .Where(r => r.Id == boardId)
+                    .Include(r => r.Owners)
+                    .FirstOrDefaultAsync();
+
+                if (board != null)
+                {
+                    if(board.Owners.
+                        Any(item => item.UserId == userId))
+                    {
+                        context.Succeed(requirement);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+}
