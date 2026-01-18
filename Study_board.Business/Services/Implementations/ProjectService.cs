@@ -58,11 +58,6 @@ namespace Study_board.Services.Implementations
                 throw new KeyNotFoundException($"Checklist ID {model.ChecklistId} not found.");
             }
 
-            if (model.ActiveTo.HasValue && model.ActiveTo.Value < model.ActiveFrom)
-            {
-                throw new ArgumentException("ActiveTo cannot be earlier than ActiveFrom.");
-            }
-
             var project = _mapper.Map<Project>(model);
             project.Id = Guid.NewGuid();
 

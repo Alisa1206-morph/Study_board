@@ -44,5 +44,43 @@ namespace Study_board.Services.Implementations
 
             return _mapper.Map<ChecklistViewModel>(checklist);
         }
+
+        public async Task<ChecklistViewModel> UpdateAsync(Guid id, ChecklistCreateOrEditViewModel model)
+        {
+            var existingChecklist = await _checklistRepository.GetByIdAsync(id, c => c.Image);
+            if (existingChecklist == null)
+            {
+                throw new KeyNotFoundException($"Checklist ID {id} not found.");
+            }
+
+            _mapper.Map(model, existingChecklist);
+            _checklistRepository.Update(existingChecklist);
+            await _checklistRepository.SaveChangesAsync();
+
+            return _mapper.Map<ChecklistViewModel>(existingChecklist);
+        }
+
+        public async Task<bool> DeleteAsync(Guid id)
+        {
+            var existingChecklist = await _checklistRepository.GetByIdAsync(id);
+            if (existingChecklist == null)
+            {
+                return false;
+            }
+
+            _checklistRepository.Delete(existingChecklist);
+            await _checklistRepository.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<IEnumerable<ChecklistViewModel>> GetByUserIdAsync(Guid userId)
+        {
+            var checklists = await _checklistRepository.FilterAsync(
+                c => c.UserId == userId,
+                new Expression<Func<Checklist, object>>[] { c => c.Image });
+
+            return _mapper.Map<IEnumerable<ChecklistViewModel>>(checklists);
+        }
+
     }
 }

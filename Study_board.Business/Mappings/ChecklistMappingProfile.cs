@@ -1,5 +1,6 @@
 using AutoMapper;
 using Study_board.Models.Domain.Entities;
+using Study_board.Models.ViewModels.Checklists.ChecklistViewModel;
 using Study_board.Models.ViewModels.Checklists;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace Study_board.Business.Mappings
             CreateMap<ChecklistImage, ChecklistImageViewModel>();
 
             CreateMap<ChecklistViewModel, ChecklistCreateOrEditViewModel>()
-                .ForMember(dest => dest.ExistingImage, opt => opt.MapFrom(src => src.Images))
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(src => src.Image))
                 .ForMember(dest => dest.Image, opt => opt.Ignore());
         }
     }

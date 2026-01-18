@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Study_board.Business.Services.Implementations
 {
-    public class ImageService : IImageService
+    public class ChecklistImageService : IChecklistImageService
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
 
