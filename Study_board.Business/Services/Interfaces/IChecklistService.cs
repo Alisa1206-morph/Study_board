@@ -1,7 +1,10 @@
 using Study_board.Models.ViewModels.Checklists;
+using Study_board.Models.ViewModels.Projects;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 namespace Study_board.Business.Services.Interfaces
@@ -25,6 +28,18 @@ namespace Study_board.Business.Services.Interfaces
     Task<IEnumerable<ChecklistViewModel>> GetAllAsync();
 
     /// <summary>
+    /// Adds project titles to their respective checklists.
+    /// </summary>
+    /// <returns>A list of <see cref="ChecklistViewModel"/> with project <see cref="ProjectViewModel"/> included.</returns>
+    Task<IEnumerable<ChecklistViewModel>> AddProjectsToChecklistsAsync(Collection<ProjectViewModel> projects);
+
+    /// <summary>
+    /// Adds image to their respective checklists.
+    /// </summary>
+    /// <returns>A list of <see cref="ChecklistViewModel"/> with image <see cref="ChecklistImageViewModel"/> included.</returns>
+    Task<IEnumerable<ChecklistViewModel>> AddImageToChecklistsAsync(Collection<ChecklistImageViewModel> images);
+
+    /// <summary>
     /// Creates a new checklist.
     /// </summary>
     /// <param name="model">The checklist data to create.</param>
@@ -36,7 +51,7 @@ namespace Study_board.Business.Services.Interfaces
     /// <param name="model">The checklist data to update.</param>
     /// <returns>The updated <see cref="ChecklistViewModel"/>.</returns>
     /// <exception cref="KeyNotFoundException">Thrown when the checklist with the provided <paramref name="id"/> does not exist.</exception>
-    Task<ChecklistViewModel> UpdateAsync(ChecklistCreateOrEditViewModel model);
+    Task<ChecklistViewModel> UpdateAsync(Guid Id, ChecklistCreateOrEditViewModel model);
     /// <summary>
     /// Deletes a checklist by its unique identifier.
     /// </summary>

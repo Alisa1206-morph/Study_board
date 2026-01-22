@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/Study_board.Models.csproj": {}
+    "/Users/admin/Study_board/Study_board.Models/Study_board.Models.csproj": {}
   },
   "projects": {
-    "/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/Study_board.Models.csproj": {
+    "/Users/admin/Study_board/Study_board.Models/Study_board.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/Study_board.Models.csproj",
+        "projectUniqueName": "/Users/admin/Study_board/Study_board.Models/Study_board.Models.csproj",
         "projectName": "Study_board.Models",
-        "projectPath": "/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/Study_board.Models.csproj",
-        "packagesPath": "/home/yana/.nuget/packages/",
-        "outputPath": "/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/obj/",
+        "projectPath": "/Users/admin/Study_board/Study_board.Models/Study_board.Models.csproj",
+        "packagesPath": "/Users/admin/.nuget/packages/",
+        "outputPath": "/Users/admin/Study_board/Study_board.Models/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/yana/.nuget/NuGet/NuGet.Config"
+          "/Users/admin/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -38,7 +38,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
@@ -60,22 +60,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[9.0.12, 9.0.12]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[9.0.12, 9.0.12]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/yana/.dotnet/sdk/10.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
