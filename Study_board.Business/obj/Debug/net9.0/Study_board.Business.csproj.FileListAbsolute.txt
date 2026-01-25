@@ -16,3 +16,12 @@
 /Users/admin/Study_board/Study_board.Business/obj/Debug/net9.0/Study_board.Business.pdb
 /Users/admin/Study_board/Study_board.Business/obj/Debug/net9.0/ref/Study_board.Business.dll
 /Users/admin/Study_board/Study_board.Business/obj/Debug/net9.0/Study_board.Business.sourcelink.json
+/home/yana/Desktop/project1-2026/Study_board/Study_board.Business/obj/Debug/net9.0/Study_board.Business.csproj.AssemblyReference.cache
+/home/yana/Desktop/project1-2026/Study_board/Study_board.Business/obj/Debug/net9.0/Study_board.Business.GeneratedMSBuildEditorConfig.editorconfig
+/home/yana/Desktop/project1-2026/Study_board/Study_board.Business/obj/Debug/net9.0/Study_board.Business.AssemblyInfoInputs.cache
+/home/yana/Desktop/project1-2026/Study_board/Study_board.Business/obj/Debug/net9.0/Study_board.Business.AssemblyInfo.cs
+/home/yana/Desktop/project1-2026/Study_board/Study_board.Business/obj/Debug/net9.0/Study_board.Business.csproj.CoreCompileInputs.cache
+/home/yana/Desktop/project1-2026/Study_board/Study_board.Business/obj/Debug/net9.0/Study_board.Business.sourcelink.json
+/home/yana/Desktop/project1-2026/Study_board/Study_board.Business/obj/Debug/net9.0/Study_board.Business.dll
+/home/yana/Desktop/project1-2026/Study_board/Study_board.Business/obj/Debug/net9.0/refint/Study_board.Business.dll
+/home/yana/Desktop/project1-2026/Study_board/Study_board.Business/obj/Debug/net9.0/Study_board.Business.pdb

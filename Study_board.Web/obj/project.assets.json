@@ -4874,19 +4874,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/admin/.nuget/packages/": {}
+    "/home/yana/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/admin/Study_board/Study_board.Web/Study_board.Web.csproj",
+      "projectUniqueName": "/home/yana/Desktop/project1-2026/Study_board/Study_board.Web/Study_board.Web.csproj",
       "projectName": "Study_board.Web",
-      "projectPath": "/Users/admin/Study_board/Study_board.Web/Study_board.Web.csproj",
-      "packagesPath": "/Users/admin/.nuget/packages/",
-      "outputPath": "/Users/admin/Study_board/Study_board.Web/obj/",
+      "projectPath": "/home/yana/Desktop/project1-2026/Study_board/Study_board.Web/Study_board.Web.csproj",
+      "packagesPath": "/home/yana/.nuget/packages/",
+      "outputPath": "/home/yana/Desktop/project1-2026/Study_board/Study_board.Web/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/admin/.nuget/NuGet/NuGet.Config"
+        "/home/yana/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -4898,11 +4898,11 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/Users/admin/Study_board/Study_board.Business/Study_board.Business.csproj": {
-              "projectPath": "/Users/admin/Study_board/Study_board.Business/Study_board.Business.csproj"
+            "/home/yana/Desktop/project1-2026/Study_board/Study_board.Business/Study_board.Business.csproj": {
+              "projectPath": "/home/yana/Desktop/project1-2026/Study_board/Study_board.Business/Study_board.Business.csproj"
             },
-            "/Users/admin/Study_board/Study_board.Data/Study_board.Data.csproj": {
-              "projectPath": "/Users/admin/Study_board/Study_board.Data/Study_board.Data.csproj"
+            "/home/yana/Desktop/project1-2026/Study_board/Study_board.Data/Study_board.Data.csproj": {
+              "projectPath": "/home/yana/Desktop/project1-2026/Study_board/Study_board.Data/Study_board.Data.csproj"
             }
           }
         }
@@ -4917,7 +4917,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -4949,6 +4949,20 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[9.0.12, 9.0.12]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.linux-x64",
+            "version": "[9.0.12, 9.0.12]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[9.0.12, 9.0.12]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -4957,7 +4971,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.203/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/home/yana/.dotnet/sdk/10.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

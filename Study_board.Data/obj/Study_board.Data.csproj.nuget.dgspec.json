@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/admin/Study_board/Study_board.Data/Study_board.Data.csproj": {}
+    "/home/yana/Desktop/project1-2026/Study_board/Study_board.Data/Study_board.Data.csproj": {}
   },
   "projects": {
-    "/Users/admin/Study_board/Study_board.Data/Study_board.Data.csproj": {
+    "/home/yana/Desktop/project1-2026/Study_board/Study_board.Data/Study_board.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/admin/Study_board/Study_board.Data/Study_board.Data.csproj",
+        "projectUniqueName": "/home/yana/Desktop/project1-2026/Study_board/Study_board.Data/Study_board.Data.csproj",
         "projectName": "Study_board.Data",
-        "projectPath": "/Users/admin/Study_board/Study_board.Data/Study_board.Data.csproj",
-        "packagesPath": "/Users/admin/.nuget/packages/",
-        "outputPath": "/Users/admin/Study_board/Study_board.Data/obj/",
+        "projectPath": "/home/yana/Desktop/project1-2026/Study_board/Study_board.Data/Study_board.Data.csproj",
+        "packagesPath": "/home/yana/.nuget/packages/",
+        "outputPath": "/home/yana/Desktop/project1-2026/Study_board/Study_board.Data/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/admin/.nuget/NuGet/NuGet.Config"
+          "/home/yana/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -26,8 +26,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "/Users/admin/Study_board/Study_board.Models/Study_board.Models.csproj": {
-                "projectPath": "/Users/admin/Study_board/Study_board.Models/Study_board.Models.csproj"
+              "/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/Study_board.Models.csproj": {
+                "projectPath": "/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/Study_board.Models.csproj"
               }
             }
           }
@@ -42,7 +42,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net9.0": {
@@ -80,26 +80,36 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[9.0.12, 9.0.12]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[9.0.12, 9.0.12]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/home/yana/.dotnet/sdk/10.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/admin/Study_board/Study_board.Models/Study_board.Models.csproj": {
+    "/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/Study_board.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/admin/Study_board/Study_board.Models/Study_board.Models.csproj",
+        "projectUniqueName": "/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/Study_board.Models.csproj",
         "projectName": "Study_board.Models",
-        "projectPath": "/Users/admin/Study_board/Study_board.Models/Study_board.Models.csproj",
-        "packagesPath": "/Users/admin/.nuget/packages/",
-        "outputPath": "/Users/admin/Study_board/Study_board.Models/obj/",
+        "projectPath": "/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/Study_board.Models.csproj",
+        "packagesPath": "/home/yana/.nuget/packages/",
+        "outputPath": "/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/admin/.nuget/NuGet/NuGet.Config"
+          "/home/yana/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -123,7 +133,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net9.0": {
@@ -145,12 +155,22 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[9.0.12, 9.0.12]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[9.0.12, 9.0.12]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/home/yana/.dotnet/sdk/10.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
