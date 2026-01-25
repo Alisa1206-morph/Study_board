@@ -11,16 +11,3 @@
 /Users/admin/Study_board/Study_board.Models/obj/Debug/net9.0/ref/Study_board.Models.dll
 /Users/admin/Study_board/Study_board.Models/obj/Debug/net9.0/Study_board.Models.csproj.AssemblyReference.cache
 /Users/admin/Study_board/Study_board.Models/obj/Debug/net9.0/Study_board.Models.sourcelink.json
-/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/bin/Debug/net9.0/Study_board.Models.deps.json
-/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/bin/Debug/net9.0/Study_board.Models.dll
-/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/bin/Debug/net9.0/Study_board.Models.pdb
-/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/obj/Debug/net9.0/Study_board.Models.csproj.AssemblyReference.cache
-/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/obj/Debug/net9.0/Study_board.Models.GeneratedMSBuildEditorConfig.editorconfig
-/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/obj/Debug/net9.0/Study_board.Models.AssemblyInfoInputs.cache
-/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/obj/Debug/net9.0/Study_board.Models.AssemblyInfo.cs
-/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/obj/Debug/net9.0/Study_board.Models.csproj.CoreCompileInputs.cache
-/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/obj/Debug/net9.0/Study_board.Models.sourcelink.json
-/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/obj/Debug/net9.0/Study_board.Models.dll
-/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/obj/Debug/net9.0/refint/Study_board.Models.dll
-/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/obj/Debug/net9.0/Study_board.Models.pdb
-/home/yana/Desktop/project1-2026/Study_board/Study_board.Models/obj/Debug/net9.0/ref/Study_board.Models.dll

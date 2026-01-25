@@ -1,5 +1,4 @@
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using Study_board.Business.Repositories.Interfaces;
 using Study_board.Business.Services.Interfaces;
 using Study_board.Models.Domain.Entities;

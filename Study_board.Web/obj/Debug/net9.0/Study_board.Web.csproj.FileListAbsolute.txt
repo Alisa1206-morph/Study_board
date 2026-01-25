@@ -222,6 +222,3 @@
 /Users/admin/Study_board/Study_board.Web/obj/Debug/net9.0/ref/Study_board.Web.dll
 /Users/admin/Study_board/Study_board.Web/bin/Debug/net9.0/Study_board.Models.dll
 /Users/admin/Study_board/Study_board.Web/bin/Debug/net9.0/Study_board.Models.pdb
-/home/yana/Desktop/project1-2026/Study_board/Study_board.Web/obj/Debug/net9.0/Study_board.Web.dll
-/home/yana/Desktop/project1-2026/Study_board/Study_board.Web/obj/Debug/net9.0/refint/Study_board.Web.dll
-/home/yana/Desktop/project1-2026/Study_board/Study_board.Web/obj/Debug/net9.0/Study_board.Web.pdb
