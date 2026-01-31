@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Study_board.Business")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1f8d5afdb14033e5438b40911f9c7b56ed0f5f4c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7edce9871a855befd0dbcf7429b6644cab3e713e")]
 [assembly: System.Reflection.AssemblyProductAttribute("Study_board.Business")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Study_board.Business")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
