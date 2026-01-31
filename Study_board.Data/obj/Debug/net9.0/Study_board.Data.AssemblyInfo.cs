@@ -13,7 +13,15 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Study_board.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7edce9871a855befd0dbcf7429b6644cab3e713e")]
+=======
+<<<<<<< HEAD
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+86afc0125e3420ca2086498a4baad7673bc01d07")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1f8d5afdb14033e5438b40911f9c7b56ed0f5f4c")]
+>>>>>>> parent of 31550a8 (fixed a problem with tolistasync)
+>>>>>>> c5ef0783bf4532f54bcfeb706beb33d438a1ade4
 [assembly: System.Reflection.AssemblyProductAttribute("Study_board.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Study_board.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
