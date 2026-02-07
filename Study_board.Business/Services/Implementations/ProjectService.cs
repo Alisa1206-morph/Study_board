@@ -4,6 +4,7 @@ using Study_board.Business.Services.Interfaces;
 using Study_board.Models.Domain.Entities;
 using Study_board.Models.ViewModels.Checklists;
 using Study_board.Models.ViewModels.Projects;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -76,9 +77,9 @@ namespace Study_board.Business.Services.Implementations
         }
 
 
-        public async Task<ProjectViewModel> UpdateAsync(ProjectCreateOrEditViewModel model)
+        public async Task<ProjectViewModel> UpdateAsync(Guid id, ProjectCreateOrEditViewModel model)
         {
-            var project = await _projectRepository.GetByIdAsync(model.Id);
+            var project = await _projectRepository.GetByIdAsync(id);
             if (project == null)
             {
                 throw new KeyNotFoundException($"Project with ID {model.Id} not found.");

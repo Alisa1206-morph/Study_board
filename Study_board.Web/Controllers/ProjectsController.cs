@@ -1,5 +1,6 @@
 using Study_board.Business.Services.Interfaces;
 using Study_board.Models.ViewModels.Projects;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;

@@ -45,7 +45,7 @@ namespace Study_board.Business.Services.Interfaces
         /// <param name="model">The Project data to update.</param>
         /// <returns>The updated <see cref="ProjectViewModel"/>.</returns>
         /// <exception cref="KeyNotFoundException">Thrown when the Project with the provided <paramref name="id"/> does not exist.</exception>
-        Task<ProjectViewModel> UpdateAsync(ProjectCreateOrEditViewModel model);
+        Task<ProjectViewModel> UpdateAsync(Guid id, ProjectCreateOrEditViewModel model);
         /// <summary>
         /// Deletes a project by its unique identifier.
         /// </summary>
