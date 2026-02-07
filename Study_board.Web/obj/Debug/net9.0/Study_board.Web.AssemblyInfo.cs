@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Study_board.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c5ef0783bf4532f54bcfeb706beb33d438a1ade4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+19ea0b134847d4752d41c5b2cc5a93cbdb385079")]
 [assembly: System.Reflection.AssemblyProductAttribute("Study_board.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Study_board.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
