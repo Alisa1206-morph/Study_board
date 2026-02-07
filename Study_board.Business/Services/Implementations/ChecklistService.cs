@@ -29,12 +29,14 @@ namespace Study_board.Business.Services.Implementations
 
         public Task<IEnumerable<ChecklistViewModel>> AddImageToChecklistsAsync(Collection<ChecklistImageViewModel> images)
         {
-            throw new NotImplementedException();
+            await _checklistRepository .AddAsync(images.Select(i => _mapper.Map<ChecklistImage>(i)));
+            return _mapper.Map<IEnumerable<ChecklistViewModel>>(await _checklistRepository.GetAllAsync());
         }
 
-        public Task<IEnumerable<ChecklistViewModel>> AddProjectsToChecklistsAsync(Collection<ProjectViewModel> projects)
+        public async Task<IEnumerable<ChecklistViewModel>> AddProjectsToChecklistsAsync(Collection<ProjectViewModel> projects)
         {
-            throw new NotImplementedException();
+            await _checklistRepository .AddAsync(projects.Select(p => _mapper.Map<Project>(p)));
+            return _mapper.Map<IEnumerable<ChecklistViewModel>>(await _checklistRepository.GetAllAsync());
         }
 
         public async Task<ChecklistViewModel> CreateAsync(ChecklistCreateOrEditViewModel model)
