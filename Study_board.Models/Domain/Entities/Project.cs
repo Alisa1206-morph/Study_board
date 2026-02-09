@@ -14,9 +14,9 @@ namespace Study_board.Models.Domain.Entities
     public class Project
     {
         /// <summary>
-        /// Gets or sets the unique identifier for the project.
+        /// Gets or sets the unique identifier for the checklist to which the project belongs.
         /// </summary>
-        public Guid Id { get; set; }
+        public Guid ChecklistId { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the project. Maximum length: 100 characters.
@@ -38,20 +38,20 @@ namespace Study_board.Models.Domain.Entities
         /// <summary>
         /// Gets or sets a value indicating whether the project is completed.
         /// </summary>
-        public bool IsCompleted { get; set; }
+        public bool IsCompleted { get; set; } = false;
 
         /// <summary>
         /// Gets or sets the type of the project (Homework, Presentation, ScienceProject, BigEssay, SmallEssay).
         /// </summary>
         public ProjectType Type { get; set; } = ProjectType.Homework;
+        
+        /// <summary>
+        /// Gets or sets the study points awarded for completing the project.
+        /// </summary>
+        public int StudyPoints { get; set; } = 0;
 
         /// <summary>
         /// Gets or sets the ID of the checklist this project belongs to.
-        /// </summary>
-        public Guid ChecklistId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the checklist this project belongs to.
         /// </summary>
         public virtual Checklist? Checklist { get; set; }
     }

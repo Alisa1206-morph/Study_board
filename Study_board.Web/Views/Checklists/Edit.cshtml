@@ -1,0 +1,67 @@
+@model Study_board.Models.ViewModels.Checklists.ChecklistCreateOrEditViewModel
+
+@{
+    ViewData["Title"] = "Edit Checklist";
+}
+
+<h1>Edit Checklist</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Image" class="form-label"></label>
+                <input asp-for="Image" class="form-control" type="file" accept="image/*" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save Changes" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <h4>Current Gallery</h4>
+
+        @if (Model.Projects != null && Model.Projects.Any())
+        {
+            <div class="row">
+                @foreach (var project in Model.Projects)
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>
+                            <i class="bi bi-folder2-open me-2"></i>
+                            @project.Name
+                        </span>
+                        <a asp-controller="Projects" asp-action="Details" asp-route-id="@project.Id" class="btn btn-sm btn-outline-primary">
+                            View Details
+                        </a>
+                    </li>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-warning">
+                No projects associated with this checklist yet.
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

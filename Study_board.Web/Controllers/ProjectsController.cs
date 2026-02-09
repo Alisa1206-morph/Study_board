@@ -24,11 +24,11 @@ namespace Study_board.Web.Controllers
             _checklistService = checklistService;
         }
 
-        // Actions for managing projects would go here
         public async Task<IActionResult> Index()
         {
             return View(await _projectService.GetAllAsync());
         }
+        
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)

@@ -27,15 +27,29 @@ namespace Study_board.Business.Services.Implementations
             _mapper = mapper;
         }
 
-        public Task<IEnumerable<ChecklistViewModel>> AddImageToChecklistsAsync(Collection<ChecklistImageViewModel> images)
+        public async Task<IEnumerable<ChecklistViewModel>> SummarizeStudyPointsInChecklistAsync()
         {
-            await _checklistRepository .AddAsync(images.Select(i => _mapper.Map<ChecklistImage>(i)));
-            return _mapper.Map<IEnumerable<ChecklistViewModel>>(await _checklistRepository.GetAllAsync());
+            var checklists = await _checklistRepository.GetAllAsync();
+            var viewModels = _mapper.Map<IEnumerable<ChecklistViewModel>>(checklists);
+
+            foreach (var vm in viewModels)
+            {
+                int total = vm.Projects?.Sum(p => p.StudyPoints) ?? 0;
+                vm.TotalStudyPoints = total;
+            }
+
+            return viewModels;
         }
 
-        public async Task<IEnumerable<ChecklistViewModel>> AddProjectsToChecklistsAsync(Collection<ProjectViewModel> projects)
+
+        public async Task<IEnumerable<ChecklistViewModel>> AddImageToChecklistsAsync(Collection<ChecklistImageViewModel> image)
         {
-            await _checklistRepository .AddAsync(projects.Select(p => _mapper.Map<Project>(p)));
+            await _checklistRepository .AddAsync(image.Select(im => _mapper.Map<ChecklistImage>(image)));
+            return _mapper.Map<IEnumerable<ChecklistViewModel>>(await _checklistRepository.GetAllAsync());
+        }
+        public async Task<IEnumerable<ChecklistViewModel>> AddProjectsToChecklistsAsync(Collection<ProjectViewModel> project)
+        {
+            await _checklistRepository .AddAsync(project.Select(p => _mapper.Map<Project>(project)));
             return _mapper.Map<IEnumerable<ChecklistViewModel>>(await _checklistRepository.GetAllAsync());
         }
 

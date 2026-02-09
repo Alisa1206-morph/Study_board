@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="../Study_board.Data/Study_board.Data.csproj" />
     <ProjectReference Include="../Study_board.Models/Study_board.Models.csproj" />
+    <ProjectReference Include="../Study_board.Models/Study_board.Domain/Study_board.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

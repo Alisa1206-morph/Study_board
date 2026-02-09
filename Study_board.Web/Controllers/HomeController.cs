@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Study_board.Models;
+using Study_board.Web.Models;
 
 namespace Study_board.Controllers;
 

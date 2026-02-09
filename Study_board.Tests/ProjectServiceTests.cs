@@ -15,22 +15,26 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Xunit;
+using System.Diagnostics.Tracing;
 
 namespace Study_board.Business.Tests.Services
 {
     public class ProjectServiceTests
     {
+        private readonly IRepository<Checklist> _checklistRepository;
         private readonly IRepository<Project> _projectRepository;
         private readonly IMapper _mapper;
         private readonly ProjectService _service;
 
         public ProjectServiceTests()
         {
+            _checklistRepository = Substitute.For<IRepository<Checklist>>();
             _projectRepository = Substitute.For<IRepository<Project>>();
             _mapper = Substitute.For<IMapper>();
 
             _service = new ProjectService(
                 _projectRepository,
+                _checklistRepository,
                 _mapper);
         }
 
@@ -44,17 +48,17 @@ namespace Study_board.Business.Tests.Services
             {
                 new Project
                 {
-                    Id = projectId,
+                    ChecklistId = projectId,
                     Name = "Test project"
                 },
-                new Project { Id = Guid.NewGuid(), Name = "Other project" }
+                new Project { ChecklistId = Guid.NewGuid(), Name = "Other project" }
             };
 
             var mockQueryable = projects.BuildMock();
 
             _projectRepository.Query().Returns(mockQueryable);
 
-            _mapper.Map<ProjectViewModel?>(Arg.Is<Project>(r => r.Id == projectId))
+            _mapper.Map<ProjectViewModel?>(Arg.Is<Project>(r => r.ChecklistId == projectId))
                 .Returns(new ProjectViewModel { Id = projectId, Name = "Test project" });
 
             // Act
@@ -87,7 +91,7 @@ namespace Study_board.Business.Tests.Services
         public async Task GetAllAsync_ShouldReturnMappedprojects_WhenRepositoryReturnsData()
         {
             // Arrange
-            var projects = new List<Project> { new Project { Id = Guid.NewGuid() } };
+            var projects = new List<Project> { new Project { ChecklistId = Guid.NewGuid() } };
             var viewModels = new List<ProjectViewModel> { new ProjectViewModel() };
 
             _projectRepository.GetAllAsync(Arg.Any<Expression<Func<Project, object>>[]>())

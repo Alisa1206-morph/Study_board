@@ -15,6 +15,12 @@ namespace Study_board.Models.ViewModels.Projects
         /// </summary>
         [Required]
         public Guid Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the unique identifier of the checklist to which the project belongs.
+        /// </summary>
+        public string ChecklistTitle { get; set; } = string.Empty;
+
         /// <summary>
         /// Gets or sets the project's name within 50 characters.
         /// </summary>
@@ -22,12 +28,14 @@ namespace Study_board.Models.ViewModels.Projects
         [MaxLength(50)]
         [MinLength(1)]
         public string Name { get; set; } = string.Empty;
+
         /// <summary>
         /// Gets or sets the project's description within 500 characters.
         /// </summary>
         [Required]
         [MaxLength(500)]
         public string Description { get; set; } = string.Empty;
+
         /// <summary>
         /// Gets or sets the due date of the project.
         /// </summary>
@@ -36,12 +44,16 @@ namespace Study_board.Models.ViewModels.Projects
         /// <summary>
         /// Gets or sets a value indicating whether the project is completed.
         /// </summary>
-        public bool IsCompleted { get; set; }
+        public bool IsCompleted { get; set; } = false;
 
         /// <summary>
         /// Gets or sets the type of the project (Homework, Presentation, ScienceProject, BigEssay, SmallEssay).
         /// </summary>
         [Required(ErrorMessage = "Project type is required.")]
         public ProjectType Type { get; set; } = ProjectType.Homework;
+        /// <summary>
+        /// Gets or sets the study points awarded for completing the project.
+        /// </summary>
+        public int StudyPoints { get; set; } = 0;
     }
 }

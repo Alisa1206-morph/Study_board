@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Study_board.Models.Domain.Entities;
+using Study_board.Models.ViewModels.Projects;
 
 namespace Study_board.Models.ViewModels.Checklists
 {
@@ -28,9 +29,9 @@ namespace Study_board.Models.ViewModels.Checklists
         public string Title { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets the list of projects associated with this checklist.
+        /// Gets or sets projects associated with this checklist.
         /// </summary>
-        public List<string> Projects { get; set; } = new List<string>();
+        public List<ProjectViewModel> Projects { get; set; } = new List<ProjectViewModel>();
 
         /// <summary>
         /// Gets or sets the image for the checklist.

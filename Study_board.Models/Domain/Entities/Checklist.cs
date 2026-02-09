@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Study_board.Models.ViewModels.Projects;
 
 namespace Study_board.Models.Domain.Entities
 {
@@ -31,9 +33,9 @@ namespace Study_board.Models.Domain.Entities
         public Guid UserId { get; set; }
 
         /// <summary>
-        /// Gets or sets the list of projects associated with this checklist.
+        /// Gets or sets the projects associated with this checklist.
         /// </summary>
-        public List<string> Projects { get; set; } = new List<string>();
+        public List<ProjectViewModel> Projects { get; set; } = new List<ProjectViewModel>();
 
         /// <summary>
         /// Gets or sets the image for the checklist.
