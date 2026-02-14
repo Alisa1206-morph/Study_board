@@ -37,5 +37,16 @@ namespace Study_board.Models.ViewModels.Checklists
         /// Gets or sets the image for the checklist.
         /// </summary>
         public virtual ChecklistImage? Image { get; set; }
+        
+        /// <summary>
+        /// Gets the total study points for all projects in the checklist by summing the StudyPoints of each project.
+        /// </summary>
+        public int TotalStudyPoints
+        {
+            get
+            {
+                return Projects.Sum(p => p.StudyPoints);
+            }
+        }
     }
 }
