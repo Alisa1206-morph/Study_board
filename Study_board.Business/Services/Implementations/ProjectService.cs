@@ -2,6 +2,7 @@ using AutoMapper;
 using Study_board.Business.Repositories.Interfaces;
 using Study_board.Business.Services.Interfaces;
 using Study_board.Models.Domain.Entities;
+using Study_board.Models.Domain.Enums.ProjectType;
 using Study_board.Models.ViewModels.Checklists;
 using Study_board.Models.ViewModels.Projects;
 using Microsoft.EntityFrameworkCore;
@@ -49,44 +50,46 @@ namespace Study_board.Business.Services.Implementations
             return _mapper.Map<IEnumerable<ProjectViewModel>>(projectEntities);
         }
 
-        public async Task<IEnumerable<ProjectViewModel>> AssignStudyPointsUponCompletionAsync(Guid checklistId)
-{
-    var projects = await _projectRepository.Query()
-        .Where(p => p.ChecklistId == checklistId)
-        .ToListAsync();
-
-    foreach (var project in projects)
-    {
-        project.StudyPoints = project.IsCompleted switch
+        public async Task<IEnumerable<ProjectViewModel>> AssignStudyPointsUponCompletionAsync(Guid checklistId, int studyPoints, bool isCompleted, Enum projectType)
         {
-            true => project.Type switch
-            {
-                ProjectType.Homework       => 10,
-                ProjectType.Presentation   => 20,
-                ProjectType.ScienceProject => 30,
-                ProjectType.BigEssay       => 25,
-                ProjectType.SmallEssay     => 15
-            },
-            false => 0
-        };
-    }
+            var projects = await _projectRepository.Query()
+                .Where(p => p.ChecklistId == checklistId)
+                .ToListAsync();
 
-    await _projectRepository.CommitAsync();
-    return _mapper.Map<IEnumerable<ProjectViewModel>>(projects);
-}
+            foreach (var project in projects)
+            {
+                project.StudyPoints = project.IsCompleted switch
+                {
+                    true => project.Type switch
+                    {
+                        ProjectType.Homework => studyPoints,
+                        ProjectType.Presentation => studyPoints * 2,
+                        ProjectType.ScienceProject => studyPoints * 3,
+                        ProjectType.BigEssay => studyPoints * 4,
+                        ProjectType.SmallEssay => studyPoints * 1,
+                        _ => 0
+                    },
+                    false => 0
+                };
+            }
+
+            await _projectRepository.CommitAsync();
+            return _mapper.Map<IEnumerable<ProjectViewModel>>(projects);
+        }
 
 
         public async Task<ProjectViewModel> CreateAsync(ProjectCreateOrEditViewModel model)
         {
-            var project = await _projectRepository.GetByIdAsync(model.ChecklistId);
-            if (project == null)
-            {
-                throw new KeyNotFoundException($"Project with ID {model.ChecklistId} not found.");
+            var checklist = await _checklistRepository.GetByIdAsync(model.ChecklistId);
+            if (checklist == null)            
+            { 
+                throw new KeyNotFoundException($"Checklist with ID {model.ChecklistId} not found.");
             }
-
-            await _projectRepository.AddAsync(project);
+      
+            var project = _mapper.Map<Project>(model);
+            project.Checklist = checklist;
+            await _projectRepository.AddAsync(project); 
             await _projectRepository.CommitAsync();
-
             return _mapper.Map<ProjectViewModel>(project);
         }
 
@@ -106,7 +109,9 @@ namespace Study_board.Business.Services.Implementations
 
         public async Task<IEnumerable<ProjectViewModel>> GetAllAsync()
         {
-            var projects = await _projectRepository.GetAllAsync();
+            var projects = await _projectRepository.Query()
+                .Include(p => p.Checklist)
+                .ToListAsync();
             return _mapper.Map<IEnumerable<ProjectViewModel>>(projects);
         }
 
@@ -124,6 +129,19 @@ namespace Study_board.Business.Services.Implementations
             return _mapper.Map<IEnumerable<ProjectViewModel>>(projects);
         }
 
+        public async Task<ProjectViewModel> MarkProjectAsCompletedAsync(Guid id)
+        {
+            var project = _projectRepository.Query()
+                .FirstOrDefault(p => p.Id == id);
+            if (project == null)
+            {
+                throw new KeyNotFoundException($"Project with ID {id} not found.");
+            }
+            project.IsCompleted = true;
+            _projectRepository.Update(project);
+            await _projectRepository.CommitAsync();
+            return _mapper.Map<ProjectViewModel>(project);
+        }
 
         public async Task<ProjectViewModel> UpdateAsync(Guid ChecklistId, ProjectCreateOrEditViewModel model)
         {
