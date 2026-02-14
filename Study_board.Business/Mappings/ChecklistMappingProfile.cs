@@ -24,9 +24,7 @@ namespace Study_board.Business.Mappings
 
             CreateMap<ChecklistImage, ChecklistImageViewModel>();
 
-            CreateMap<ChecklistViewModel, ChecklistCreateOrEditViewModel>()
-                .ForMember(dest => dest.Image, opt => opt.MapFrom(src => src.Image))
-                .ForMember(dest => dest.Image, opt => opt.Ignore());
+            CreateMap<ChecklistViewModel, ChecklistCreateOrEditViewModel>();
         }
     }
 }
