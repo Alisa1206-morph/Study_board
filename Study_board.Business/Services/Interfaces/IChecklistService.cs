@@ -36,13 +36,13 @@ namespace Study_board.Business.Services.Interfaces
     /// Adds project titles to their respective checklists.
     /// </summary>
     /// <returns>A list of <see cref="ChecklistViewModel"/> with project <see cref="ProjectViewModel"/> included.</returns>
-    Task<IEnumerable<ChecklistViewModel>> AddProjectsToChecklistsAsync(Collection<ProjectViewModel> projects);
+    Task<IEnumerable<ChecklistViewModel>> AddProjectsToChecklistsAsync(Guid checklistId, List<ProjectViewModel> projects);
 
     /// <summary>
     /// Adds image to their respective checklists.
     /// </summary>
     /// <returns>A list of <see cref="ChecklistViewModel"/> with image <see cref="ChecklistImageViewModel"/> included.</returns>
-    Task<IEnumerable<ChecklistViewModel>> AddImageToChecklistsAsync(Collection<ChecklistImageViewModel> images);
+    Task<IEnumerable<ChecklistViewModel>> AddImageToChecklistsAsync(Guid checklistId, ChecklistImageViewModel image);
 
     /// <summary>
     /// Creates a new checklist.
