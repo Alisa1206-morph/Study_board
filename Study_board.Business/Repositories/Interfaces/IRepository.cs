@@ -65,6 +65,5 @@ namespace Study_board.Business.Repositories.Interfaces
         /// </summary>
         /// <returns>An <see cref="IQueryable{T}"/> for entity type.</returns>
         public IQueryable<T> Query();
-        Task SaveChangesAsync();
     }
 }

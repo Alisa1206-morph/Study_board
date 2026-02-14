@@ -79,10 +79,5 @@ namespace Study_board.Business.Repositories.Implementations
         {
             return _dbSet.AsQueryable();
         }
-
-        public Task SaveChangesAsync()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
