@@ -14,6 +14,12 @@ namespace Study_board.Models.Domain.Entities
     public class Project
     {
         /// <summary>
+        /// Gets or sets the unique identifier for the project.
+        /// </summary>
+        [Key]
+        public Guid Id { get; set; }
+
+        /// <summary>
         /// Gets or sets the unique identifier for the checklist to which the project belongs.
         /// </summary>
         public Guid ChecklistId { get; set; }
