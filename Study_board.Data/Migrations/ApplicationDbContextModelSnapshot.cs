@@ -28,13 +28,13 @@ namespace Study_board.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.PrimitiveCollection<string>("Projects")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -54,15 +54,50 @@ namespace Study_board.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsMainImage")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ChecklistId")
                         .IsUnique();
 
-                    b.ToTable("ChecklistImage");
+                    b.ToTable("ChecklistImages");
+                });
+
+            modelBuilder.Entity("Study_board.Models.Domain.Entities.Project", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ChecklistId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime?>("DueDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("StudyPoints")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChecklistId");
+
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("Study_board.Models.Domain.Entities.ChecklistImage", b =>
@@ -76,9 +111,22 @@ namespace Study_board.Data.Migrations
                     b.Navigation("Checklist");
                 });
 
+            modelBuilder.Entity("Study_board.Models.Domain.Entities.Project", b =>
+                {
+                    b.HasOne("Study_board.Models.Domain.Entities.Checklist", "Checklist")
+                        .WithMany("Projects")
+                        .HasForeignKey("ChecklistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Checklist");
+                });
+
             modelBuilder.Entity("Study_board.Models.Domain.Entities.Checklist", b =>
                 {
                     b.Navigation("Image");
+
+                    b.Navigation("Projects");
                 });
 #pragma warning restore 612, 618
         }
