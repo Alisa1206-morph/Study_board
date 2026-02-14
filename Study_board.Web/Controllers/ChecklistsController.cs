@@ -56,7 +56,7 @@ namespace Study_board.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ChecklistCreateOrEditViewModel checklist)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 await _checklistService.CreateAsync(checklist);
                 return RedirectToAction(nameof(Index));
@@ -89,7 +89,7 @@ namespace Study_board.Web.Controllers
                 var existing = await _checklistService.GetByIdAsync(id);
                 if (existing != null)
                 {
-                    checklist.Image = existing.Image;
+                //    checklist.Image = existing.Image;
                 }
                 try
                 {
