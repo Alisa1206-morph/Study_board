@@ -27,15 +27,15 @@ namespace Study_board.Business.Services.Implementations
             _mapper = mapper;
         }
 
-        public Task<IEnumerable<ChecklistViewModel>> AddImageToChecklistsAsync(Collection<ChecklistImageViewModel> images)
+        public async Task<IEnumerable<ChecklistViewModel>> AddImageToChecklistsAsync(Collection<ChecklistImageViewModel> images)
         {
-            await _checklistRepository .AddAsync(images.Select(i => _mapper.Map<ChecklistImage>(i)));
+            await _checklistRepository.AddAsync(images.Select(i => _mapper.Map<ChecklistImage>(i)));
             return _mapper.Map<IEnumerable<ChecklistViewModel>>(await _checklistRepository.GetAllAsync());
         }
 
         public async Task<IEnumerable<ChecklistViewModel>> AddProjectsToChecklistsAsync(Collection<ProjectViewModel> projects)
         {
-            await _checklistRepository .AddAsync(projects.Select(p => _mapper.Map<Project>(p)));
+            await _checklistRepository.AddAsync(projects.Select(p => _mapper.Map<Project>(p)));
             return _mapper.Map<IEnumerable<ChecklistViewModel>>(await _checklistRepository.GetAllAsync());
         }
 
