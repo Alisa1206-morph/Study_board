@@ -9,11 +9,10 @@
   <ItemGroup>
     <ProjectReference Include="../Study_board.Data/Study_board.Data.csproj" />
     <ProjectReference Include="../Study_board.Models/Study_board.Models.csproj" />
-    <ProjectReference Include="../Study_board.Models/Study_board.Domain/Study_board.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="16.0.0" />
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.0" />
   </ItemGroup>
 

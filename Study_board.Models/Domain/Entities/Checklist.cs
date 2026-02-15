@@ -35,7 +35,7 @@ namespace Study_board.Models.Domain.Entities
         /// <summary>
         /// Gets or sets the projects associated with this checklist.
         /// </summary>
-        public List<ProjectViewModel> Projects { get; set; } = new List<ProjectViewModel>();
+        public List<Project> Projects { get; set; } = new List<Project>();
 
         /// <summary>
         /// Gets or sets the image for the checklist.

@@ -1,5 +1,13 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Study_board.Business.Mappings;
+using Study_board.Business.Repositories.Implementations;
+using Study_board.Business.Repositories.Interfaces;
+using Study_board.Business.Services.Implementations;
+using Study_board.Business.Services.Interfaces;
 using Study_board.Data;
+using Study_board.Models.Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,13 +24,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(typeof(ChecklistMappingProfile).Assembly);
 builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddTransient<IChecklistService, ChecklistService>();
-builder.Services.AddTransient<IImageService, ImageService>();
 builder.Services.AddTransient<IProjectService, ProjectService>();
 
 var app = builder.Build();

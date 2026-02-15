@@ -1,5 +1,6 @@
 using Study_board.Models.Domain.Entities;
 using Study_board.Models.ViewModels.Projects;
+using Study_board.Models.Domain.Enums.ProjectType;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -33,9 +34,9 @@ namespace Study_board.Business.Services.Interfaces
         /// <param name="checklistId">The ID of the checklist.</param>
         /// <param name="studyPoints">The number of study points to assign.</param>
         /// <param name="isCompleted">Whether the project is completed.</param>
-        /// <param name="type">The type of the project.</param>
+        /// <param name="projectType">The type of the project.</param>
         /// <returns>A list of updated project view models.</returns>
-        Task<IEnumerable<ProjectViewModel>> AssignStudyPointsUponCompletionAsync(Guid checklistId, int studyPoints, bool isCompleted, ProjectType type);
+        Task<IEnumerable<ProjectViewModel>> AssignStudyPointsUponCompletionAsync(Guid checklistId, int studyPoints, bool isCompleted, Enum projectType);
 
         /// <summary>
         /// Gets all projects.
@@ -69,5 +70,12 @@ namespace Study_board.Business.Services.Interfaces
         /// <returns>The deleted <see cref="ProjectViewModel"/>.</returns>
         /// <exception cref="KeyNotFoundException">Thrown when the Project with the provided <paramref name="id"/> does not exist.</exception>
         Task<ProjectViewModel> DeleteAsync(Guid id);
+
+        /// <summary>
+        /// Marks a project as completed and assigns study points based on the project type.
+        /// </summary>
+        /// <param name="id">The unique identifier of the project to mark as completed.</param>
+        /// <returns>The updated <see cref="ProjectViewModel"/>.</returns>
+        Task<ProjectViewModel> MarkProjectAsCompletedAsync(Guid id);
     }
 }

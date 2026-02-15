@@ -29,6 +29,25 @@ namespace Study_board.Web.Controllers
             return View(await _projectService.GetAllAsync());
         }
         
+
+        public async Task<IActionResult> Complete(Guid? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var project = await _projectService.GetByIdAsync(id.Value);
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            await _projectService.MarkProjectAsCompletedAsync(id.Value);
+
+            return RedirectToAction(nameof(Index));
+        }
+
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -46,6 +65,8 @@ namespace Study_board.Web.Controllers
         }
         public async Task<IActionResult> Create()
         {
+            ViewBag.Checklists = (await _checklistService.GetAllAsync()).Select(item => new SelectListItem() { Value = item.Id.ToString(), Text = item.Title }).ToList();
+
             return View();
         }
 
@@ -53,11 +74,13 @@ namespace Study_board.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProjectCreateOrEditViewModel project)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 await _projectService.CreateAsync(project);
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Checklists = (await _checklistService.GetAllAsync()).Select(item => new SelectListItem() { Value = item.Id.ToString(), Text = item.Title }).ToList();
+
             return View(project);
         }
 
@@ -73,6 +96,7 @@ namespace Study_board.Web.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Checklists = (await _checklistService.GetAllAsync()).Select(item => new SelectListItem() { Value = item.Id.ToString(), Text = item.Title }).ToList();
 
             return View(project);
         }
@@ -101,6 +125,9 @@ namespace Study_board.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            
+            ViewBag.Checklists = (await _checklistService.GetAllAsync()).Select(item => new SelectListItem() { Value = item.Id.ToString(), Text = item.Title }).ToList();
+
             return View(project);
         }
 

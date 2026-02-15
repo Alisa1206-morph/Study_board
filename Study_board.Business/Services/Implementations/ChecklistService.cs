@@ -19,37 +19,51 @@ namespace Study_board.Business.Services.Implementations
     public class ChecklistService : IChecklistService
     {
         private readonly IRepository<Checklist> _checklistRepository;
+        private readonly IRepository<ChecklistImage> _checklistImageRepository;
         private readonly IMapper _mapper;
 
-        public ChecklistService(IRepository<Checklist> checklistRepository, IMapper mapper)
+        public ChecklistService(IRepository<Checklist> checklistRepository, IRepository<ChecklistImage> checklistImageRepository, IMapper mapper)
         {
             _checklistRepository = checklistRepository;
+            _checklistImageRepository = checklistImageRepository;
             _mapper = mapper;
         }
 
         public async Task<IEnumerable<ChecklistViewModel>> SummarizeStudyPointsInChecklistAsync()
         {
             var checklists = await _checklistRepository.GetAllAsync();
-            var viewModels = _mapper.Map<IEnumerable<ChecklistViewModel>>(checklists);
+            return _mapper.Map<IEnumerable<ChecklistViewModel>>(checklists);
+        }
 
-            foreach (var vm in viewModels)
+
+        public async Task<IEnumerable<ChecklistViewModel>> AddImageToChecklistsAsync(Guid checklistId, ChecklistImageViewModel image)
+        {
+            var checklist = await _checklistRepository.GetByIdAsync(checklistId);
+            if (checklist == null)
             {
-                int total = vm.Projects?.Sum(p => p.StudyPoints) ?? 0;
-                vm.TotalStudyPoints = total;
+                throw new KeyNotFoundException($"Checklist with ID {checklistId} not found.");
             }
 
-            return viewModels;
-        }
-
-
-        public async Task<IEnumerable<ChecklistViewModel>> AddImageToChecklistsAsync(Collection<ChecklistImageViewModel> image)
-        {
-            await _checklistRepository .AddAsync(image.Select(im => _mapper.Map<ChecklistImage>(image)));
+            var checklistImage = _mapper.Map<ChecklistImage>(image);
+            checklist.Image = checklistImage;
+            await _checklistRepository.CommitAsync();
             return _mapper.Map<IEnumerable<ChecklistViewModel>>(await _checklistRepository.GetAllAsync());
         }
-        public async Task<IEnumerable<ChecklistViewModel>> AddProjectsToChecklistsAsync(Collection<ProjectViewModel> project)
+        public async Task<IEnumerable<ChecklistViewModel>> AddProjectsToChecklistsAsync(Guid checklistId, List<ProjectViewModel> projects)
         {
-            await _checklistRepository .AddAsync(project.Select(p => _mapper.Map<Project>(project)));
+            var checklist = await _checklistRepository.GetByIdAsync(checklistId);
+            if (checklist == null)
+            {
+                throw new KeyNotFoundException($"Checklist with ID {checklistId} not found.");
+            }
+
+            foreach (var project in projects)
+            {
+                var projectEntity = _mapper.Map<Project>(project);
+                checklist.Projects.Add(projectEntity);
+            }
+
+            await _checklistRepository.CommitAsync();
             return _mapper.Map<IEnumerable<ChecklistViewModel>>(await _checklistRepository.GetAllAsync());
         }
 
@@ -57,7 +71,7 @@ namespace Study_board.Business.Services.Implementations
         {
             var checklistEntity = _mapper.Map<Checklist>(model);
             await _checklistRepository.AddAsync(checklistEntity);
-            await _checklistRepository.SaveChangesAsync();
+            await _checklistRepository.CommitAsync();
             return _mapper.Map<ChecklistViewModel>(checklistEntity);
         }
 
@@ -70,7 +84,7 @@ namespace Study_board.Business.Services.Implementations
             }
 
             _checklistRepository.Remove(checklist);
-            await _checklistRepository.SaveChangesAsync();
+            await _checklistRepository.CommitAsync();
 
             return _mapper.Map<ChecklistViewModel>(checklist);
         }
@@ -96,7 +110,7 @@ namespace Study_board.Business.Services.Implementations
             }
 
             _mapper.Map(model, checklist);
-            await _checklistRepository.SaveChangesAsync();
+            await _checklistRepository.CommitAsync();
 
             return _mapper.Map<ChecklistViewModel>(checklist);
         }
