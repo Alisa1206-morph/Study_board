@@ -1,0 +1,123 @@
+using AutoMapper;
+using FluentAssertions;
+using Study_board.Business.Repositories.Interfaces;
+using Study_board.Business.Services.Implementations;
+using Study_board.Business.Services.Interfaces;
+using Study_board.Models.Domain.Entities;
+using Study_board.Models.ViewModels.Checklists;
+using Microsoft.AspNetCore.Http;
+using MockQueryable;
+using MockQueryable.NSubstitute;
+using NSubstitute;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using Xunit;
+using System.Diagnostics.Tracing;
+
+namespace Study_board.Business.Tests.Services
+{
+    public class ChecklistTests
+    {
+        private readonly IRepository<Checklist> _checklistRepository;
+        private readonly IRepository<ChecklistImage> _checklistImageRepository;
+        private readonly IMapper _mapper;
+        private readonly ChecklistService _service;
+
+        public ChecklistTests()
+        {
+            _checklistRepository = Substitute.For<IRepository<Checklist>>();
+            _checklistImageRepository = Substitute.For<IRepository<ChecklistImage>>();
+            _mapper = Substitute.For<IMapper>();
+
+            _service = new ChecklistService(
+                _checklistRepository,
+                _checklistImageRepository,
+                _mapper);
+        }
+
+        [Fact]
+        public async Task GetByIdAsync_ShouldReturnMappedChecklist_WhenFound()
+        {
+            // Arrange
+            var checklistId = Guid.NewGuid();
+
+            var checklists = new List<Checklist>
+            {
+                new Checklist
+                {
+                    ChecklistId = checklistId,
+                    Name = "Test checklist"
+                },
+                new Checklist { ChecklistId = Guid.NewGuid(), Name = "Other checklist" }
+            };
+
+            var mockQueryable = checklists.BuildMock();
+
+            _checklistRepository.Query().Returns(mockQueryable);
+
+            _mapper.Map<ChecklistViewModel?>(Arg.Is<Checklist>(r => r.ChecklistId == checklistId))
+                .Returns(new ChecklistViewModel { Id = checklistId, Name = "Test checklist" });
+
+            // Act
+            var result = await _service.GetByIdAsync(checklistId);
+
+            // Assert
+            result.Should().NotBeNull();
+            result.Id.Should().Be(checklistId);
+
+            _checklistRepository.Received(1).Query();
+        }
+[Fact]
+        public async Task GetByIdAsync_ShouldReturnNull_WhenNotFound()
+        {
+            // Arrange
+            var checklists = new List<Checklist>();
+            var mockQueryable = checklists.BuildMock();
+
+            _checklistRepository.Query().Returns(mockQueryable);
+
+            // Act
+            var result = await _service.GetByIdAsync(Guid.NewGuid());
+
+            // Assert
+            result.Should().BeNull();
+        } 
+        [Fact]
+        public async Task GetAllAsync_ShouldReturnMappedprojects_WhenRepositoryReturnsData()
+        {
+            // Arrange
+            var checklists = new List<Checklist> { new Checklist { ChecklistId = Guid.NewGuid() } };
+            var viewModels = new List<ChecklistViewModel> { new ChecklistViewModel() };
+
+            _checklistRepository.GetAllAsync(Arg.Any<Expression<Func<Checklist, object>>[]>())
+                .Returns(checklists);
+
+            _mapper.Map<IEnumerable<ChecklistViewModel>>(checklists).Returns(viewModels);
+
+            // Act
+            var result = await _service.GetAllAsync();
+
+            // Assert
+            result.Should().NotBeNull();
+            result.Should().HaveCount(1);
+        }
+
+
+        [Fact]
+        public async Task UpdateAsync_ShouldThrowKeyNotFoundException_WhenIdDoesNotExist()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            _checklistRepository.GetByIdAsync(id, Arg.Any<Expression<Func<Checklist, object>>[]>())
+                .Returns((Checklist)null);
+
+            // Act & Assert
+            await Assert.ThrowsAsync<KeyNotFoundException>(() =>
+                _service.UpdateAsync(id, new ChecklistCreateOrEditViewModel()));
+        }
+    }
+}
+        
