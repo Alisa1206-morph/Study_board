@@ -82,6 +82,7 @@ namespace Study_board.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        
         public async Task<IActionResult> Edit(Guid id, ChecklistCreateOrEditViewModel checklist)
         {
             if (ModelState.IsValid)

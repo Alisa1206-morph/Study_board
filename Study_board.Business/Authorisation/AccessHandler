@@ -37,7 +37,7 @@ namespace Study_board.Business.Authorization.Handlers
 
             if(roles.Contains("User"))
             {
-                Board? board = await _restaurantRepository
+                Board? board = await _boardRepository
                     .Query()
                     .Where(r => r.Id == boardId)
                     .Include(r => r.Owners)
@@ -53,6 +53,7 @@ namespace Study_board.Business.Authorization.Handlers
                     }
                 }
             }
+            
         }
     }
 }
