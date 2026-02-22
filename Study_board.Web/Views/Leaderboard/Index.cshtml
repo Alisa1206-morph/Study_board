@@ -1,0 +1,24 @@
+@model Study_board.Models.ViewModels.Leaderboard.LeaderboardViewModel
+
+<h1>Leaderboard</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>User</th>
+            <th>Total Study Points</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ int rank = 1; }
+        @foreach (var user in Model.Users) {
+            <tr>
+                <td>@(rank++)</td>
+                <td>@user.UserName</td>
+                <td>@user.TotalStudyPoints</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
