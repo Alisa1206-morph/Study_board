@@ -21,6 +21,12 @@ namespace Study_board.Business.Services.Interfaces
     /// <returns>A <see cref="ChecklistViewModel"/> if found; otherwise, <see langword="null"/>.</returns>
     Task<ChecklistViewModel?> GetByIdAsync(Guid id);
     /// <summary>
+    /// Gets a checklist by its unique identifier.
+    /// </summary>
+    /// <param name="id">The unique identifier of the checklist.</param>
+    /// <returns>A <see cref="ChecklistCreateOrEditViewModel"/> if found; otherwise, <see langword="null"/>.</returns>
+    Task<ChecklistCreateOrEditViewModel?> GetForEditByIdAsync(Guid id);
+    /// <summary>
     /// Summarizes the total study points for all projects within a checklist.
     /// </summary>
     /// <returns>A <see cref="ChecklistViewModel"/> with total study points included.</returns>

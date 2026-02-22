@@ -8,30 +8,68 @@ a.navbar-brand {
 }
 
 a {
-  color: #0077cc;
+  color: var(--color-primary);
 }
 
 .btn-primary {
   color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+  background-color: var(--color-primary);
+  border-color: #5e7ce9;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+  background-color: var(--color-primary);
+  border-color: #5e7ce9;
+}
+
+div.form-check {
+  margin-bottom: 0.5rem;
+}
+
+div.form-check .form-check-input {
+  margin-top: 0.3rem;
+}
+
+div.form-check .form-check-label {
+  margin-left: 1.5rem;
+}
+
+div.form-check .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem skyblue;
+}
+
+div.form-check .form-check-input:focus:not(:focus-visible) {
+  box-shadow: none;
+}
+
+.container {
+  max-width: 1288px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+body
+{
+  color:var(--color-primary);
+  font-family: Poppins, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5; /* 27/18 coeficient */
+  background-color: var(--color-primary);
+
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid var(--color-primary);
 }
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid var(--color-primary);
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+  box-shadow: 0 .25rem .75rem #98fb98;
 }
 
 button.accept-policy {
@@ -40,9 +78,8 @@ button.accept-policy {
 }
 
 .footer {
-  position: absolute;
+  position: relative;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  line-height: 60px;
 }

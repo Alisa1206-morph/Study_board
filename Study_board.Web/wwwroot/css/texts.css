@@ -1,0 +1,14 @@
+.text-brand{
+    color: var(--color-primary);
+}
+
+.text-brand-dark{
+    color: var(--color-primary)
+}
+.text-bold{
+    font-weight: 600;
+}
+
+.text-uppercase{
+    text-transform: uppercase;
+}

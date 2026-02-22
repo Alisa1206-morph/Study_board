@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Study_board.Business.Repositories.Interfaces;
 using Study_board.Business.Services.Interfaces;
 using Study_board.Models.Domain.Entities;
@@ -32,6 +33,14 @@ namespace Study_board.Business.Services.Implementations
         public async Task<IEnumerable<ChecklistViewModel>> SummarizeStudyPointsInChecklistAsync()
         {
             var checklists = await _checklistRepository.GetAllAsync();
+            foreach (var checklist in checklists)
+            {
+                checklist.Projects.ForEach(p =>
+                {
+                    p.StudyPoints = p.IsCompleted ? p.StudyPoints : 0;
+                });
+            }
+            await _checklistRepository.CommitAsync();
             return _mapper.Map<IEnumerable<ChecklistViewModel>>(checklists);
         }
 
@@ -97,7 +106,12 @@ namespace Study_board.Business.Services.Implementations
 
         public async Task<ChecklistViewModel?> GetByIdAsync(Guid id)
         {
-            var checklist = await _checklistRepository.GetByIdAsync(id);
+            var checklist = await _checklistRepository.Query()
+                .Include(c => c.Projects)
+                .Include(c => c.Image)
+                .Where(c => c.Id == id)
+                .FirstOrDefaultAsync();
+                
             return _mapper.Map<ChecklistViewModel>(checklist);
         }
 
@@ -109,10 +123,21 @@ namespace Study_board.Business.Services.Implementations
                 throw new KeyNotFoundException($"Checklist with ID {Id} not found.");
             }
 
-            _mapper.Map(model, checklist);
+            checklist.Title = model.Title;
             await _checklistRepository.CommitAsync();
 
             return _mapper.Map<ChecklistViewModel>(checklist);
+        }
+
+        public async Task<ChecklistCreateOrEditViewModel?> GetForEditByIdAsync(Guid id)
+        {
+            var checklist = await _checklistRepository.Query()
+                .Include(c => c.Projects)
+                .Include(c => c.Image)
+                .Where(c => c.Id == id)
+                .FirstOrDefaultAsync();
+                
+            return _mapper.Map<ChecklistCreateOrEditViewModel>(checklist);
         }
     }
 }

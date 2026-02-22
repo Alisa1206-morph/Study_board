@@ -24,6 +24,7 @@ namespace Study_board.Business.Tests.Services
         private readonly IRepository<Checklist> _checklistRepository;
         private readonly IRepository<Project> _projectRepository;
         private readonly IMapper _mapper;
+        private readonly StudyPointsSettings _studyPointsSettings;
         private readonly ProjectService _service;
 
         public ProjectServiceTests()
@@ -31,11 +32,22 @@ namespace Study_board.Business.Tests.Services
             _checklistRepository = Substitute.For<IRepository<Checklist>>();
             _projectRepository = Substitute.For<IRepository<Project>>();
             _mapper = Substitute.For<IMapper>();
+            _studyPointsSettings = new StudyPointsSettings
+            {
+                Homework = 10,
+                Presentation = 20,
+                ScienceProject = 30,
+                BigEssay = 25,
+                SmallEssay = 15
+            };
+
+            var options = Microsoft.Extensions.Options.Options.Create(_studyPointsSettings);
 
             _service = new ProjectService(
                 _projectRepository,
                 _checklistRepository,
-                _mapper);
+                _mapper,
+                options);
         }
 
         [Fact]

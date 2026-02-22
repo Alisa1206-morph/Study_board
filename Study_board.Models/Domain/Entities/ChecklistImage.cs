@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Study_board.Models.ViewModels.Checklists;
 
 namespace Study_board.Models.Domain.Entities
 {
@@ -31,5 +32,10 @@ namespace Study_board.Models.Domain.Entities
         /// </summary>
         [ForeignKey(nameof(ChecklistId))]
         public virtual Checklist Checklist { get; set; } = null!;
+
+        public static implicit operator ChecklistImage(ChecklistImageViewModel v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

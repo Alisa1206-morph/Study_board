@@ -1,10 +1,11 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Study_board.Models.Domain.Entities;
 
 
-namespace Study_board.Data
+namespace Study_board.Data.Persistance
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) 
             : base(options)
@@ -39,6 +40,14 @@ namespace Study_board.Data
 
             entity.Property(p => p.Type)
                 .IsRequired();
+        });
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasMany(u => u.Checklists)
+                .WithOne()
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         });
     }
 }

@@ -1,8 +1,60 @@
-﻿@{
+﻿@model IEnumerable<Study_board.Models.ViewModels.Checklists.ChecklistViewModel>
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to Study Board!</h1>
+    <p>Organize your study projects and track your progress.</p>
+    <a class="btn btn-primary btn-lg" asp-area="" asp-controller="Projects" asp-action="Index">View Projects</a>
 </div>
+<container class="section">
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Checklists</h2>
+            <p>Keep track of your study tasks with our easy-to-use checklists.</p>
+            <div class="d-grid gap-2">
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>My checklists </h2>
+        <a asp-action="Create" asp-controller="Checklist">Create new
+        </a>
+    </div>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            @foreach (var checklist in Model ?? Enumerable.Empty<Study_board.Models.ViewModels.Checklists.ChecklistViewModel>())
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">@checklist.Title</h5>
+                            <p class="card-text text-muted">
+                                @(checklist.Title?.Length > 100 
+                                    ? checklist.Title.Substring(0, 100) + "..." 
+                                    : checklist.Title)
+                            </p>
+                        </div>
+                        <div class="card-footer bg-transparent border-top-0">
+                            <a asp-action="Details" asp-route-id="@checklist.Id" 
+                               class="btn btn-outline-primary btn-sm w-100">
+                                Open
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        
+    </div>
+</div>
+</container>
+        <div class="col-md-4">
+            <h2>Projects</h2>
+            <p>Manage your study projects and stay organized.</p>
+            <a class="btn btn-primary" asp-area="" asp-controller="Projects" asp-action="Index">View Projects</a>
+        </div>
+        <div class="col-md-4">
+            <h2>Leaderboard</h2>
+            <p>See how you stack up against other students on the leaderboard.</p>
+            <a class="btn btn-primary" asp-area="" asp-controller="Leaderboard" asp-action="Index">View Leaderboard</a>
+        </div>
+
+

@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Study_board.Business.Repositories.Interfaces;
-using Study_board.Data;
+using Study_board.Data.Persistance;
 
 
 namespace Study_board.Business.Repositories.Implementations

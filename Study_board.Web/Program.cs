@@ -6,7 +6,7 @@ using Study_board.Business.Repositories.Implementations;
 using Study_board.Business.Repositories.Interfaces;
 using Study_board.Business.Services.Implementations;
 using Study_board.Business.Services.Interfaces;
-using Study_board.Data;
+using Study_board.Data.Persistance;
 using Study_board.Models.Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,17 +20,22 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // Add services to the container
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddDefaultUI()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(typeof(ChecklistMappingProfile).Assembly);
 builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddTransient<IChecklistService, ChecklistService>();
 builder.Services.AddTransient<IProjectService, ProjectService>();
+builder.Services.AddScoped<ILeaderboardService, LeaderboardService>();
+builder.Services.Configure<StudyPointsSettings>(
+    builder.Configuration.GetSection("StudyPointsSettings"));
+
+
+
 
 var app = builder.Build();
 
