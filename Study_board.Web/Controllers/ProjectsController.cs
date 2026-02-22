@@ -1,5 +1,6 @@
 using Study_board.Business.Services.Interfaces;
 using Study_board.Models.ViewModels.Projects;
+using Study_board.Models.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -7,6 +8,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
+using Microsoft.Extensions.Options;
 
 namespace Study_board.Web.Controllers
 {
@@ -17,12 +19,25 @@ namespace Study_board.Web.Controllers
     {
         private readonly IProjectService _projectService;
         private readonly IChecklistService _checklistService;
+        private readonly StudyPointsSettings _points;
 
-        public ProjectsController(IProjectService projectService, IChecklistService checklistService)
+        public ProjectsController(IProjectService projectService, IChecklistService checklistService, IOptions<StudyPointsSettings> options)
         {
             _projectService = projectService;
             _checklistService = checklistService;
+            _points = options.Value;
         }
+
+        public IActionResult GetPoints()
+        {
+            int homeworkPoints = _points.Homework;
+            int presentationPoints = _points.Presentation;
+            int scienceProjectPoints = _points.ScienceProject;
+            int bigEssayPoints = _points.BigEssay;
+            int smallEssayPoints = _points.SmallEssay;
+            return View(_points);
+        }
+
 
         public async Task<IActionResult> Index()
         {
@@ -91,7 +106,7 @@ namespace Study_board.Web.Controllers
                 return NotFound();
             }
 
-            var project = await _projectService.GetByIdAsync(id.Value);
+            var project = await _projectService.GetForEditByIdAsync(id.Value);
             if (project == null)
             {
                 return NotFound();
@@ -107,7 +122,7 @@ namespace Study_board.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var existing = await _projectService.GetByIdAsync(id);
+                var existing = await _projectService.GetForEditByIdAsync(id);
                 try
                 {
                     await _projectService.UpdateAsync(id, project);
