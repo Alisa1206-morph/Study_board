@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 
 namespace Study_board.Business.Services.Implementations
 {
@@ -23,12 +24,14 @@ namespace Study_board.Business.Services.Implementations
         private readonly IRepository<Project> _projectRepository;
         private readonly IRepository<Checklist> _checklistRepository;
         private readonly IMapper _mapper;
+        private readonly StudyPointsSettings _studyPointsSettings;
 
-        public ProjectService(IRepository<Project> projectRepository, IRepository<Checklist> checklistRepository, IMapper mapper)
+        public ProjectService(IRepository<Project> projectRepository, IRepository<Checklist> checklistRepository, IMapper mapper, IOptions<StudyPointsSettings> studyPointsSettings)
         {
             _projectRepository = projectRepository;
             _checklistRepository = checklistRepository;
             _mapper = mapper;
+            _studyPointsSettings = studyPointsSettings.Value;
         }
 
         public async Task<IEnumerable<ProjectViewModel>> AddProjectsToChecklistAsync(Guid checklistId, Collection<ProjectCreateOrEditViewModel> projects)
@@ -58,21 +61,23 @@ namespace Study_board.Business.Services.Implementations
 
             foreach (var project in projects)
             {
-                project.StudyPoints = project.IsCompleted switch
+                if (project.IsCompleted)
                 {
-                    true => project.Type switch
+                    project.StudyPoints = projectType switch
                     {
-                        ProjectType.Homework => studyPoints,
-                        ProjectType.Presentation => studyPoints * 2,
-                        ProjectType.ScienceProject => studyPoints * 3,
-                        ProjectType.BigEssay => studyPoints * 4,
-                        ProjectType.SmallEssay => studyPoints * 1,
+                        ProjectType.Homework => _studyPointsSettings.Homework,
+                        ProjectType.Presentation => _studyPointsSettings.Presentation,
+                        ProjectType.ScienceProject => _studyPointsSettings.ScienceProject,
+                        ProjectType.BigEssay => _studyPointsSettings.BigEssay,
+                        ProjectType.SmallEssay => _studyPointsSettings.SmallEssay,
                         _ => 0
-                    },
-                    false => 0
-                };
-            }
-
+                    };
+                }
+                else
+                {
+                    project.StudyPoints = 0;
+                }
+            };
             await _projectRepository.CommitAsync();
             return _mapper.Map<IEnumerable<ProjectViewModel>>(projects);
         }
@@ -119,6 +124,12 @@ namespace Study_board.Business.Services.Implementations
         {
             var project = await _projectRepository.GetByIdAsync(id, p => p.Checklist);
             return _mapper.Map<ProjectViewModel>(project);
+        }
+
+        public async Task<ProjectCreateOrEditViewModel?> GetForEditByIdAsync(Guid id)
+        {
+            var project = await _projectRepository.GetByIdAsync(id, p => p.Checklist);
+            return _mapper.Map<ProjectCreateOrEditViewModel>(project);
         }
 
         public async Task<IEnumerable<ProjectViewModel>> GetProjectsByChecklistIdAsync(Guid ChecklistId)

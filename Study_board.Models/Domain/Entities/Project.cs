@@ -23,6 +23,11 @@ namespace Study_board.Models.Domain.Entities
         /// Gets or sets the unique identifier for the checklist to which the project belongs.
         /// </summary>
         public Guid ChecklistId { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the user ID of the owner of the project. This is used to associate the project with a specific user and to ensure that users can only access and modify their own projects.
+        /// </summary>
+        public string UserId { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the name of the project. Maximum length: 100 characters.
