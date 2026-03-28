@@ -18,7 +18,7 @@ namespace Study_board.Business.Tests.Authorisation
     public class AuthorisationTests
     {
         [Fact]
-        public void AccessRequirement_ShouldImplementIAuthorizationRequirement()
+        public void AccessRequirement_ShouldRejectIfUserIsNotInRole()
         {
             
         }
