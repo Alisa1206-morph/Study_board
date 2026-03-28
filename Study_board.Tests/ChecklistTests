@@ -86,7 +86,7 @@ namespace Study_board.Business.Tests.Services
             result.Should().BeNull();
         } 
         [Fact]
-        public async Task GetAllAsync_ShouldReturnMappedprojects_WhenRepositoryReturnsData()
+        public async Task GetAllAsync_ShouldReturnMappedChecklists_WhenRepositoryReturnsData()
         {
             // Arrange
             var checklists = new List<Checklist> { new Checklist { ChecklistId = Guid.NewGuid() } };
@@ -118,6 +118,30 @@ namespace Study_board.Business.Tests.Services
             await Assert.ThrowsAsync<KeyNotFoundException>(() =>
                 _service.UpdateAsync(id, new ChecklistCreateOrEditViewModel()));
         }
+
+        [Fact]
+        public async Task AddProjectsToChecklistAsync_ShouldThrowKeyNotFoundException_WhenChecklistDoesNotExist()
+        {
+            // Arrange
+            var checklistId = Guid.NewGuid();
+            _checklistRepository.GetByIdAsync(checklistId).Returns((Checklist)null);
+
+            // Act & Assert
+            await Assert.ThrowsAsync<KeyNotFoundException>(() =>
+                _service.AddProjectsToChecklistAsync(checklistId, new List<ProjectViewModel>()));
+            
     }
+    [Fact]
+        public async Task AddProjectsToChecklistAsync_ShouldAddProject_WhenChecklistExists()
+        {
+            // Arrange
+            var checklistId = Guid.NewGuid();
+            var checklist = new Checklist { ChecklistId = checklistId };
+            _checklistRepository.GetByIdAsync(checklistId).Returns(checklist);
+
+            
+            
+    }
+}
 }
         
