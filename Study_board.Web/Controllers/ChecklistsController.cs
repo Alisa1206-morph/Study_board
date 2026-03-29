@@ -49,7 +49,7 @@ namespace Study_board.Web.Controllers
             var project = await _context.Projects.FindAsync(projectId);
             if (project == null || project.UserId != userId) return NotFound();
 
-            int pointsToAdd = GetPointsByType(project.Type, new StudyPointsSettings
+            int pointsToAdd = GetPointsByType(project.ProjectType, new StudyPointsSettings
             {
                 Homework = 10,
                 Presentation = 20,

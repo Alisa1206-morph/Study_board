@@ -38,7 +38,7 @@ namespace Study_board.Data.Persistance
             entity.Property(p => p.Description)
                 .HasMaxLength(500);
 
-            entity.Property(p => p.Type)
+            entity.Property(p => p.ProjectType)
                 .IsRequired();
         });
 

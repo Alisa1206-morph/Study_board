@@ -44,7 +44,7 @@ namespace Study_board.Business.Services.Interfaces
         /// <param name="isCompleted">Whether the project is completed.</param>
         /// <param name="projectType">The type of the project.</param>
         /// <returns>A list of updated project view models.</returns>
-        Task<IEnumerable<ProjectViewModel>> AssignStudyPointsUponCompletionAsync(Guid checklistId, int studyPoints, bool isCompleted, Enum projectType);
+        Task<IEnumerable<ProjectViewModel>> AssignStudyPointsUponCompletionAsync(Guid checklistId, bool isCompleted, ProjectType projectType);
 
         /// <summary>
         /// Gets all projects.
