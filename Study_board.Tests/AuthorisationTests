@@ -1,0 +1,26 @@
+using AutoMapper;
+using FluentAssertions;
+using Study_board.Business.Authorisation;
+using Microsoft.AspNetCore.Http;
+using MockQueryable;
+using MockQueryable.NSubstitute;
+using NSubstitute;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using Xunit;
+using System.Diagnostics.Tracing;
+
+namespace Study_board.Business.Tests.Authorisation
+{
+    public class AuthorisationTests
+    {
+        [Fact]
+        public void AccessRequirement_ShouldRejectIfUserIsNotInRole()
+        {
+            
+        }
+    }
+}

@@ -83,6 +83,7 @@ namespace Study_board.Business.Services.Implementations
         }
 
 
+        
         public async Task<ProjectViewModel> CreateAsync(ProjectCreateOrEditViewModel model)
         {
             var checklist = await _checklistRepository.GetByIdAsync(model.ChecklistId);
