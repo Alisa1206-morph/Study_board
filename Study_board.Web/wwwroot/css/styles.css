@@ -97,6 +97,23 @@
   font-style: normal;
 }
 
+button,
+label,
+input,
+legend,
+textarea,
+select,
+option,
+table,
+ul.tree-view,
+.window,
+.title-bar,
+li[role=tab] {
+  font-family: "Pixelated MS Sans Serif", Arial;
+  -webkit-font-smoothing: none;
+  font-size: 11px;
+}
+
 body{
   font-family: Arial;
   font-size: 12px;
@@ -113,6 +130,28 @@ body{
 h1, h2, h3, h4, h5, h6, p{
     margin-top: 0;
 }
+
+h1 {
+  font-size: 5rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+u {
+  text-decoration: none;
+  border-bottom: 0.5px solid #222222;
+}
+
 
 a{
     display:inline-block;
@@ -166,7 +205,7 @@ image{
 .hero-section{
     max-width: 100%;
     padding: 272px 0;
-    background-image: url('images/loving-senior-couple-drinking-tea-garden-happy-big-colorful-mugs-sitting-wooden-bench-backyard-44141329-3030256671.jpeg'),
+    background-image: url(https://www.astropix.org/archive/stsci/2025-141b/stsci_2025-141b_320.jpg),
                       linear-gradient(102.76deg,
                       rgba(18, 18, 17, 0.78),
                       rgba(18, 18, 17, 0.6),
@@ -439,4 +478,22 @@ ul {
 .form-terms-link{
     color: var(--color-accent);
     text-underline-offset: 2px;
+}
+
+.table {
+    border-collapse: collapse;
+  position: relative;
+  text-align: left;
+  white-space: nowrap;
+  background-color: #fff;
+}
+
+table > tbody > tr.highlighted {
+  color: #fff;
+  background-color: var(--dialog-blue);
+}
+
+table > tbody > tr > * {
+  padding: 0 var(--grouped-element-spacing);
+  height: 14px;
 }
