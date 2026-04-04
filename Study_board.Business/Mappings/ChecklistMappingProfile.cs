@@ -18,6 +18,8 @@ namespace Study_board.Business.Mappings
         {
             CreateMap<Checklist, ChecklistViewModel>();
 
+            CreateMap<Checklist, ChecklistCreateOrEditViewModel>();
+
             CreateMap<ChecklistCreateOrEditViewModel, Checklist>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.Image, opt => opt.Ignore());

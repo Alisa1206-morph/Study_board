@@ -30,12 +30,24 @@ namespace Study_board.Models.Domain.Entities
         /// <summary>
         /// Gets or sets the user ID who owns this checklist.
         /// </summary>
-        public Guid UserId { get; set; }
+        public string UserId { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the projects associated with this checklist.
         /// </summary>
         public List<Project> Projects { get; set; } = new List<Project>();
+        /// <summary>
+        /// Gets or sets the total study points for all projects in the checklist by summing the StudyPoints of each project.
+        /// </summary>
+        /// 
+        [NotMapped]
+        public int TotalStudyPoints
+        {
+            get
+            {
+                return Projects.Sum(p => p.StudyPoints);
+            }
+        }
 
         /// <summary>
         /// Gets or sets the image for the checklist.

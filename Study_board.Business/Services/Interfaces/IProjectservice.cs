@@ -21,6 +21,14 @@ namespace Study_board.Business.Services.Interfaces
         /// <param name="id">The unique identifier of the project.</param>
         /// <returns>A <see cref="ProjectViewModel"/> if found; otherwise, <see langword="null"/>.</returns>
         Task<ProjectViewModel?> GetByIdAsync(Guid id);
+        
+        /// <summary>
+        /// Gets a project by its unique identifier for editing.
+        /// </summary>
+        /// <param name="id">The unique identifier of the project.</param>
+        /// <returns>A <see cref="ProjectCreateOrEditViewModel"/> if found; otherwise, <see langword="null"/>.</returns>
+        Task<ProjectCreateOrEditViewModel?> GetForEditByIdAsync(Guid id);
+        
         /// <summary>
         /// Adds project entities to a specific checklist.
         /// </summary>
@@ -36,7 +44,7 @@ namespace Study_board.Business.Services.Interfaces
         /// <param name="isCompleted">Whether the project is completed.</param>
         /// <param name="projectType">The type of the project.</param>
         /// <returns>A list of updated project view models.</returns>
-        Task<IEnumerable<ProjectViewModel>> AssignStudyPointsUponCompletionAsync(Guid checklistId, int studyPoints, bool isCompleted, Enum projectType);
+        Task<IEnumerable<ProjectViewModel>> AssignStudyPointsUponCompletionAsync(Guid checklistId, bool isCompleted, ProjectType projectType);
 
         /// <summary>
         /// Gets all projects.

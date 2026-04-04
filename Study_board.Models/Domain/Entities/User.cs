@@ -17,5 +17,9 @@ namespace Study_board.Models.Domain.Entities
         /// Gets or sets the collection of checklists associated with the user. Each checklist represents a set of projects that the user is working on.
         /// </summary>
         public virtual ICollection<Checklist>? Checklists { get; set; } = new List<Checklist>();
+        /// <summary>
+        /// Gets or sets the total study points accumulated by the user. Study points are awarded based on the completion of projects, and this property provides a way to track the user's overall progress and performance on the platform.
+        /// </summary>
+        public int TotalStudyPoints {get; set;} = 0;
     }
 }

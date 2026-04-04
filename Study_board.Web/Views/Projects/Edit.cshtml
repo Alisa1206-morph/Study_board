@@ -7,7 +7,9 @@
 
 <h1>Edit Project</h1>
 
-<form method="post">
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" method="post">
     <div asp-validation-summary="All" class="text-danger"></div>
 
     <div class="mb-3">
@@ -46,8 +48,10 @@
 
     <button type="submit" class="btn btn-warning">Save</button>
     <a asp-action="Index" class="btn btn-secondary">Back</a>
-</form>
+    </form>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+    </div>
+</div>

@@ -20,6 +20,8 @@ namespace Study_board.Business.Mappings
                 .ForMember(m => m.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(m => m.ChecklistTitle, opt => opt.MapFrom(src => src.Checklist.Title));
             CreateMap<ProjectCreateOrEditViewModel, Project>();
+            CreateMap<Project, ProjectCreateOrEditViewModel>()
+                .ForMember(dest => dest.ChecklistId, opt => opt.MapFrom(src => src.ChecklistId));
         }
     }
 }

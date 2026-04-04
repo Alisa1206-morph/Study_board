@@ -1,5 +1,7 @@
 using Study_board.Business.Services.Interfaces;
+using Study_board.Business.Services.Implementations;
 using Study_board.Models.ViewModels.Projects;
+using Study_board.Models.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -7,6 +9,9 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
+using Microsoft.Extensions.Options;
+using Study_board.Models.Domain.Enums.ProjectType;
+using System.Diagnostics.Tracing;
 
 namespace Study_board.Web.Controllers
 {
@@ -17,12 +22,31 @@ namespace Study_board.Web.Controllers
     {
         private readonly IProjectService _projectService;
         private readonly IChecklistService _checklistService;
+        private readonly StudyPointsSettings _points;
 
-        public ProjectsController(IProjectService projectService, IChecklistService checklistService)
+        public ProjectsController(IProjectService projectService, IChecklistService checklistService, IOptions<StudyPointsSettings> options)
         {
             _projectService = projectService;
             _checklistService = checklistService;
+            _points = options.Value;
         }
+
+        public async Task<IActionResult> GetPoints()
+        {
+            var selectedType = Console.ReadLine() switch
+            {
+                "Homework" => ProjectType.Homework,
+                "Presentation" => ProjectType.Presentation,
+                "ScienceProject" => ProjectType.ScienceProject,
+                "BigEssay" => ProjectType.BigEssay,
+                "SmallEssay" => ProjectType.SmallEssay,
+                _ => throw new ArgumentException("Invalid project type")
+            };
+
+            var studyPoints = await _projectService.AssignStudyPointsUponCompletionAsync(Guid.NewGuid(), true, selectedType);
+            return View(studyPoints);
+        }
+
 
         public async Task<IActionResult> Index()
         {
@@ -91,7 +115,7 @@ namespace Study_board.Web.Controllers
                 return NotFound();
             }
 
-            var project = await _projectService.GetByIdAsync(id.Value);
+            var project = await _projectService.GetForEditByIdAsync(id.Value);
             if (project == null)
             {
                 return NotFound();
@@ -107,7 +131,7 @@ namespace Study_board.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var existing = await _projectService.GetByIdAsync(id);
+                var existing = await _projectService.GetForEditByIdAsync(id);
                 try
                 {
                     await _projectService.UpdateAsync(id, project);

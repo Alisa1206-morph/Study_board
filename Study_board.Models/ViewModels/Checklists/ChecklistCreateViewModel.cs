@@ -13,7 +13,7 @@ namespace Study_board.Models.ViewModels.Checklists
     /// <summary>
     /// Represents the data required when creating checklist
     /// </summary>
-    public class ChecklistCreateOrEditViewModel
+    public class ChecklistCreateViewModel
     {
         /// <summary>
         /// Gets or sets the checklist's title
@@ -23,15 +23,6 @@ namespace Study_board.Models.ViewModels.Checklists
         [Required]
         public string Title { get; set; } = string.Empty;
 
-        /// <summary>
-        /// Gets or sets the user ID who owns this checklist.
-        /// </summary>
-        public string UserId { get; set; } = string.Empty;
-        
-        /// <summary>
-        /// Gets or sets the image file for the checklist. This property is used when creating or editing a checklist to upload a new image. The actual image data will be processed in the controller and saved as a ChecklistImage entity associated with the checklist.
-        /// </summary>
-        public IFormFile? Image { get; set; }
         /// <summary>
         /// Gets or sets projects associated with this checklist.
         /// </summary>
