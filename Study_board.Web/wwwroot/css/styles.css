@@ -324,14 +324,14 @@ image{
 }
 
 .link{
-    color: #faf4ea;
+    color: #0000ff;
     text-decoration: none;
     line-height: 1.5;
     transition: color 0.3s;
 }
 
 .link:hover{
-    color: #819b57;
+    color: #0000ff;
     font-weight: 600;
 }
 
@@ -435,7 +435,7 @@ ul {
 }
 
 .form-input::placeholder-shown{
-    background-color: #819b57;
+    background-color: #fff;
 }
 
 .form-label{
@@ -472,7 +472,7 @@ ul {
     font-weight:500;
     font-size:12px;
     line-height:1.5;
-    text-align:center;
+    text-align:left;
 }
 
 .form-terms-link{
@@ -486,6 +486,21 @@ ul {
   text-align: left;
   white-space: nowrap;
   background-color: #fff;
+}
+
+table > thead > tr > * {
+  position: sticky;
+  top: 0;
+  height: 17px;
+  box-shadow: var(--border-raised-outer), var(--border-raised-inner);
+  background: var(--surface);
+  box-sizing: border-box;
+  font-weight: normal;
+  padding: 0 var(--grouped-element-spacing);
+}
+
+table.interactive > tbody > tr {
+  cursor: pointer;
 }
 
 table > tbody > tr.highlighted {
