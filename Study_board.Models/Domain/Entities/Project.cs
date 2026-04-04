@@ -54,7 +54,7 @@ namespace Study_board.Models.Domain.Entities
         /// <summary>
         /// Gets or sets the type of the project (Homework, Presentation, ScienceProject, BigEssay, SmallEssay).
         /// </summary>
-        public ProjectType Type { get; set; } = ProjectType.Homework;
+        public ProjectType ProjectType { get; set; }
         
         /// <summary>
         /// Gets or sets the study points awarded for completing the project.

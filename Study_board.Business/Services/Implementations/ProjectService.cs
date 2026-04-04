@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
+using Study_board.Models.ViewModels.Users;
 
 namespace Study_board.Business.Services.Implementations
 {
@@ -53,7 +54,7 @@ namespace Study_board.Business.Services.Implementations
             return _mapper.Map<IEnumerable<ProjectViewModel>>(projectEntities);
         }
 
-        public async Task<IEnumerable<ProjectViewModel>> AssignStudyPointsUponCompletionAsync(Guid checklistId, int studyPoints, bool isCompleted, Enum projectType)
+        public async Task<IEnumerable<ProjectViewModel>> AssignStudyPointsUponCompletionAsync(Guid checklistId, bool isCompleted, ProjectType projectType)
         {
             var projects = await _projectRepository.Query()
                 .Where(p => p.ChecklistId == checklistId)
@@ -61,7 +62,7 @@ namespace Study_board.Business.Services.Implementations
 
             foreach (var project in projects)
             {
-                if (project.IsCompleted)
+                if (project.IsCompleted == true)
                 {
                     project.StudyPoints = projectType switch
                     {

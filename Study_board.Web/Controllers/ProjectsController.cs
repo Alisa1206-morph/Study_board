@@ -1,4 +1,5 @@
 using Study_board.Business.Services.Interfaces;
+using Study_board.Business.Services.Implementations;
 using Study_board.Models.ViewModels.Projects;
 using Study_board.Models.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Options;
+using Study_board.Models.Domain.Enums.ProjectType;
+using System.Diagnostics.Tracing;
 
 namespace Study_board.Web.Controllers
 {
@@ -28,14 +31,20 @@ namespace Study_board.Web.Controllers
             _points = options.Value;
         }
 
-        public IActionResult GetPoints()
+        public async Task<IActionResult> GetPoints()
         {
-            int homeworkPoints = _points.Homework;
-            int presentationPoints = _points.Presentation;
-            int scienceProjectPoints = _points.ScienceProject;
-            int bigEssayPoints = _points.BigEssay;
-            int smallEssayPoints = _points.SmallEssay;
-            return View(_points);
+            var selectedType = Console.ReadLine() switch
+            {
+                "Homework" => ProjectType.Homework,
+                "Presentation" => ProjectType.Presentation,
+                "ScienceProject" => ProjectType.ScienceProject,
+                "BigEssay" => ProjectType.BigEssay,
+                "SmallEssay" => ProjectType.SmallEssay,
+                _ => throw new ArgumentException("Invalid project type")
+            };
+
+            var studyPoints = await _projectService.AssignStudyPointsUponCompletionAsync(Guid.NewGuid(), true, selectedType);
+            return View(studyPoints);
         }
 
 
