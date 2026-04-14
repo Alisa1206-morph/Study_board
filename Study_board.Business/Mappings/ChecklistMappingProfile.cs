@@ -16,13 +16,15 @@ namespace Study_board.Business.Mappings
     {
         public ChecklistMappingProfile()
         {
-            CreateMap<Checklist, ChecklistViewModel>();
+            CreateMap<Checklist, ChecklistViewModel>()
+                .ForMember(dest => dest.TotalStudyPoints, opt => opt.MapFrom(src => src.Projects.Sum(p => p.StudyPoints)));
 
             CreateMap<Checklist, ChecklistCreateOrEditViewModel>();
 
             CreateMap<ChecklistCreateOrEditViewModel, Checklist>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
-                .ForMember(dest => dest.Image, opt => opt.Ignore());
+                .ForMember(dest => dest.Image, opt => opt.Ignore())
+                .ForMember(dest => dest.Projects, opt => opt.Ignore());
 
             CreateMap<ChecklistImage, ChecklistImageViewModel>();
 
