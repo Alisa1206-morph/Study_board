@@ -38,11 +38,11 @@
     </div>
 
     <div class="mb-3">
-        <label asp-for="Type" class="form-label"></label>
-        <select asp-for="Type" class="form-select" asp-items="Html.GetEnumSelectList<Study_board.Models.Domain.Enums.ProjectType.ProjectType>()">
+        <label asp-for="ProjectType" class="form-label"></label>
+        <select asp-for="ProjectType" class="form-select" asp-items="Html.GetEnumSelectList<Study_board.Models.Domain.Enums.ProjectType.ProjectType>()">
             <option value="">-- Select Type --</option>
         </select>
-        <span asp-validation-for="Type" class="text-danger"></span>
+        <span asp-validation-for="ProjectType" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-warning">Save</button>
