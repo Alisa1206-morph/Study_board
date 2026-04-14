@@ -14,6 +14,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Study_board.Models.ViewModels.Users;
+using System.IO.Pipes;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Study_board.Business.Services.Implementations
 {
@@ -47,6 +49,7 @@ namespace Study_board.Business.Services.Implementations
             foreach (var project in projectEntities)
             {
                 project.ChecklistId = checklistId;
+                project.Checklist = checklist;
                 await _projectRepository.AddAsync(project);
             }
             await _projectRepository.CommitAsync();
@@ -54,33 +57,47 @@ namespace Study_board.Business.Services.Implementations
             return _mapper.Map<IEnumerable<ProjectViewModel>>(projectEntities);
         }
 
-        public async Task<IEnumerable<ProjectViewModel>> AssignStudyPointsUponCompletionAsync(Guid checklistId, bool isCompleted, ProjectType projectType)
+        public async Task<IEnumerable<ProjectViewModel>> GetByUserIdAsync(string userId)
         {
             var projects = await _projectRepository.Query()
-                .Where(p => p.ChecklistId == checklistId)
+                .Where(p => p.UserId == userId)
+                .Include(p => p.Checklist)
                 .ToListAsync();
-
-            foreach (var project in projects)
-            {
-                if (project.IsCompleted == true)
-                {
-                    project.StudyPoints = projectType switch
-                    {
-                        ProjectType.Homework => _studyPointsSettings.Homework,
-                        ProjectType.Presentation => _studyPointsSettings.Presentation,
-                        ProjectType.ScienceProject => _studyPointsSettings.ScienceProject,
-                        ProjectType.BigEssay => _studyPointsSettings.BigEssay,
-                        ProjectType.SmallEssay => _studyPointsSettings.SmallEssay,
-                        _ => 0
-                    };
-                }
-                else
-                {
-                    project.StudyPoints = 0;
-                }
-            };
-            await _projectRepository.CommitAsync();
+                
             return _mapper.Map<IEnumerable<ProjectViewModel>>(projects);
+        }
+
+        public async Task<ProjectViewModel> AssignStudyPointsUponCompletionAsync(Guid projectId)
+        {
+            var project = await _projectRepository.Query()
+                .Where(p => p.Id == projectId)
+                .Include(p => p.Checklist)
+                .FirstOrDefaultAsync();
+            if (project == null)
+            {
+                throw new KeyNotFoundException($"Project with ID {projectId} not found.");
+            }
+            if (project.IsCompleted)
+            {
+                project.StudyPoints = project.ProjectType switch
+                {
+                    ProjectType.Homework => _studyPointsSettings.Homework,
+                    ProjectType.Presentation => _studyPointsSettings.Presentation,
+                    ProjectType.ScienceProject => _studyPointsSettings.ScienceProject,
+                    ProjectType.BigEssay => _studyPointsSettings.BigEssay,
+                    ProjectType.SmallEssay => _studyPointsSettings.SmallEssay,
+                    _ => 0
+                };
+            }
+            else
+            {
+                project.StudyPoints = 0;
+            }
+
+            _projectRepository.Update(project);
+            await _projectRepository.CommitAsync();
+
+            return _mapper.Map<ProjectViewModel>(project);
         }
 
 
@@ -101,7 +118,7 @@ namespace Study_board.Business.Services.Implementations
 
         public async Task<ProjectViewModel> DeleteAsync(Guid id)
         {
-            var project = await _projectRepository.GetByIdAsync(id);
+            var project = await _projectRepository.GetByIdAsync(id, p => p.Checklist);
             if (project == null)
             {
                 throw new KeyNotFoundException($"ID {id} not found.");
@@ -137,14 +154,16 @@ namespace Study_board.Business.Services.Implementations
         {
             var projects = await _projectRepository.Query()
                 .Where(p => p.ChecklistId == ChecklistId)
+                .Include(p => p.Checklist)
                 .ToListAsync();
             return _mapper.Map<IEnumerable<ProjectViewModel>>(projects);
         }
 
         public async Task<ProjectViewModel> MarkProjectAsCompletedAsync(Guid id)
         {
-            var project = _projectRepository.Query()
-                .FirstOrDefault(p => p.Id == id);
+            var project = await _projectRepository.Query()
+                .Include(p => p.Checklist)
+                .FirstOrDefaultAsync(p => p.Id == id);
             if (project == null)
             {
                 throw new KeyNotFoundException($"Project with ID {id} not found.");
@@ -157,7 +176,7 @@ namespace Study_board.Business.Services.Implementations
 
         public async Task<ProjectViewModel> UpdateAsync(Guid ChecklistId, ProjectCreateOrEditViewModel model)
         {
-            var project = await _projectRepository.GetByIdAsync(ChecklistId);
+            var project = await _projectRepository.GetByIdAsync(ChecklistId, p => p.Checklist);
             if (project == null)
             {
                 throw new KeyNotFoundException($"Project with ID {model.ChecklistId} not found.");

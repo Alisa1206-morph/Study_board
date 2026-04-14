@@ -39,6 +39,13 @@ namespace Study_board.Business.Services.Interfaces
     Task<IEnumerable<ChecklistViewModel>> GetAllAsync();
 
     /// <summary>
+    /// Gets all checklists associated with a specific user.
+    /// </summary>
+    /// <param name="userId">The unique identifier of the user.</param>
+    /// <returns>A list of <see cref="ChecklistViewModel"/> associated with the specified user.</returns>
+    Task<IEnumerable<ChecklistViewModel>> GetByUserIdAsync(string userId);
+    
+    /// <summary>
     /// Adds project titles to their respective checklists.
     /// </summary>
     /// <returns>A list of <see cref="ChecklistViewModel"/> with project <see cref="ProjectViewModel"/> included.</returns>
