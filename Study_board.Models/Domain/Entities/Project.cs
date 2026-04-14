@@ -59,7 +59,7 @@ namespace Study_board.Models.Domain.Entities
         /// <summary>
         /// Gets or sets the study points awarded for completing the project.
         /// </summary>
-        public int StudyPoints { get; set; } = 0;
+        public int StudyPoints { get; set; }
 
         /// <summary>
         /// Gets or sets the ID of the checklist this project belongs to.
