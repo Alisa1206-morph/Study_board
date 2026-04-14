@@ -36,7 +36,15 @@ namespace Study_board.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _checklistService.GetAllAsync());
+            //if the user is admin, load all checklists, otherwise load only the checklists of the current user
+            if (User.IsInRole("Admin"))
+            {
+                return View(await _checklistService.GetAllAsync());
+            } 
+            else
+            {
+                return View(await _checklistService.GetByUserIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+            }
         }
 
         [Authorize]

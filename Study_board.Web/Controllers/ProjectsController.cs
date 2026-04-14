@@ -10,8 +10,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 using Study_board.Models.Domain.Enums.ProjectType;
 using System.Diagnostics.Tracing;
+using Study_board.Models.ViewModels.Users;
+using Study_board.Business.Repositories.Interfaces;
+using Study_board.Business.Repositories.Implementations;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Study_board.Web.Controllers
 {
@@ -22,35 +29,30 @@ namespace Study_board.Web.Controllers
     {
         private readonly IProjectService _projectService;
         private readonly IChecklistService _checklistService;
+        private readonly ProjectType _projectType;
         private readonly StudyPointsSettings _points;
+        private readonly IRepository<Checklist> _checklistRepository;
 
-        public ProjectsController(IProjectService projectService, IChecklistService checklistService, IOptions<StudyPointsSettings> options)
+        public ProjectsController(IProjectService projectService, IChecklistService checklistService, IRepository<Checklist> checklistRepository, IOptions<StudyPointsSettings> points)
         {
             _projectService = projectService;
             _checklistService = checklistService;
-            _points = options.Value;
+            _checklistRepository = checklistRepository;
+            _points = points.Value;
         }
 
-        public async Task<IActionResult> GetPoints()
-        {
-            var selectedType = Console.ReadLine() switch
-            {
-                "Homework" => ProjectType.Homework,
-                "Presentation" => ProjectType.Presentation,
-                "ScienceProject" => ProjectType.ScienceProject,
-                "BigEssay" => ProjectType.BigEssay,
-                "SmallEssay" => ProjectType.SmallEssay,
-                _ => throw new ArgumentException("Invalid project type")
-            };
-
-            var studyPoints = await _projectService.AssignStudyPointsUponCompletionAsync(Guid.NewGuid(), true, selectedType);
-            return View(studyPoints);
-        }
-
-
+        [Authorize]
         public async Task<IActionResult> Index()
         {
-            return View(await _projectService.GetAllAsync());
+            //if the user is admin, load all projects, otherwise load only the projects of the current user
+            if (User.IsInRole("Admin"))
+            {
+                return View(await _projectService.GetAllAsync());
+            } 
+            else
+            {
+                return View(await _projectService.GetByUserIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+            }
         }
         
 
@@ -68,6 +70,7 @@ namespace Study_board.Web.Controllers
             }
 
             await _projectService.MarkProjectAsCompletedAsync(id.Value);
+            await _projectService.AssignStudyPointsUponCompletionAsync(id.Value);
 
             return RedirectToAction(nameof(Index));
         }
@@ -89,7 +92,8 @@ namespace Study_board.Web.Controllers
         }
         public async Task<IActionResult> Create()
         {
-            ViewBag.Checklists = (await _checklistService.GetAllAsync()).Select(item => new SelectListItem() { Value = item.Id.ToString(), Text = item.Title }).ToList();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            ViewBag.Checklists = await GetUserChecklistsAsSelectListAsync(userId);
 
             return View();
         }
@@ -100,12 +104,43 @@ namespace Study_board.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                var isOwner = await _checklistRepository.Query()
+                .AnyAsync(c => c.Id == project.ChecklistId && c.UserId == userId);
+                if (!isOwner)
+                {
+                    ModelState.AddModelError("ChecklistId", "You can only assign projects to your own checklists.");
+                }
+                else
+                {
+                    project.UserId = userId;
+
+                    await _projectService.CreateAsync(project);
+                    return RedirectToAction(nameof(Index));
+                }
+                var userChecklists = await _checklistRepository.Query()
+                .Where(c => c.UserId == project.UserId)
+                .ToListAsync();
                 await _projectService.CreateAsync(project);
                 return RedirectToAction(nameof(Index));
             }
             ViewBag.Checklists = (await _checklistService.GetAllAsync()).Select(item => new SelectListItem() { Value = item.Id.ToString(), Text = item.Title }).ToList();
 
             return View(project);
+        }
+
+        private async Task<List<SelectListItem>> GetUserChecklistsAsSelectListAsync(string userId)
+        {
+            var checklists = await _checklistRepository.Query()
+            .Where(c => c.UserId == userId)
+            .ToListAsync();
+
+            return checklists.Select(item => new SelectListItem()
+            {
+                Value = item.Id.ToString(),
+                Text = item.Title
+            }).ToList();
         }
 
         public async Task<IActionResult> Edit(Guid? id)
