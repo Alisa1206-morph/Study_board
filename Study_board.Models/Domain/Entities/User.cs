@@ -8,6 +8,7 @@ using Study_board.Models.Domain.Enums.ProjectType;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Study_board.Models.Domain.Entities;
 
 namespace Study_board.Models.Domain.Entities
 {
@@ -20,6 +21,6 @@ namespace Study_board.Models.Domain.Entities
         /// <summary>
         /// Gets or sets the total study points accumulated by the user. Study points are awarded based on the completion of projects, and this property provides a way to track the user's overall progress and performance on the platform.
         /// </summary>
-        public int TotalStudyPoints {get; set;} = 0;
+        public int TotalStudyPoints { get; set; } = 0;
     }
 }
