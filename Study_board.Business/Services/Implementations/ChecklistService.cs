@@ -104,6 +104,17 @@ namespace Study_board.Business.Services.Implementations
             return _mapper.Map<IEnumerable<ChecklistViewModel>>(checklists);
         }
 
+        public async Task<IEnumerable<ChecklistViewModel>> GetByUserIdAsync(string userId)
+        {
+            var checklists = await _checklistRepository.Query()
+                .Include(c => c.Projects)
+                .Include(c => c.Image)
+                .Where(c => c.UserId == userId)
+                .ToListAsync();
+                
+            return _mapper.Map<IEnumerable<ChecklistViewModel>>(checklists);
+        }
+
         public async Task<ChecklistViewModel?> GetByIdAsync(Guid id)
         {
             var checklist = await _checklistRepository.Query()

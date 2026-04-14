@@ -39,6 +39,11 @@ namespace Study_board.Models.ViewModels.Checklists
         public virtual ChecklistImage? Image { get; set; }
         
         /// <summary>
+        /// Gets or sets the user ID who owns this checklist.
+        /// </summary>
+        public string UserId { get; set; } = string.Empty;
+
+        /// <summary>
         /// Gets the total study points for all projects in the checklist by summing the StudyPoints of each project.
         /// </summary>
         public int TotalStudyPoints

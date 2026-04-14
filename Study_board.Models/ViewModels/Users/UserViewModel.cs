@@ -22,7 +22,7 @@ namespace Study_board.Models.ViewModels.Users
         {
             get
             {
-                return Checklists?.Sum(c => c.Projects.Sum(p => p.StudyPoints)) ?? 0;
+                return Checklists?.Where(c => c.UserId == Id).Sum(c => c.Projects.Sum(p => p.StudyPoints)) ?? 0;
             }
         }
 

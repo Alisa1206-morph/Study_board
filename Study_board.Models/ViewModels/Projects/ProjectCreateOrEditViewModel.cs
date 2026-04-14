@@ -36,10 +36,15 @@ namespace Study_board.Models.ViewModels.Projects
         /// <summary>
         /// Gets or sets the type of the project (Homework, Presentation, ScienceProject, BigEssay, SmallEssay).
         /// </summary>
-        public ProjectType Type { get; set; } = ProjectType.Homework;
+        public ProjectType ProjectType { get; set; }
         /// <summary>
         /// Gets or sets the study points awarded for completing the project.
         /// </summary>
-        public int StudyPoints { get; set; } = 0;
+        public int StudyPoints { get; set; }
+
+        /// <summary>
+        /// Gets or sets the user ID of the owner of the project. This is used to associate the project with a specific user and to ensure that users can only access and modify their own projects.
+        /// </summary>
+        public string UserId { get; set; } = string.Empty;
     }
 }

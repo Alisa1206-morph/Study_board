@@ -5,9 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 namespace Study_board.Models.Domain.Entities
 {
-    /// <summary>
-    /// Represents the settings for study points awarded for different types of projects.
-    /// </summary>
     public class StudyPointsSettings
     {
         /// <summary>

@@ -36,21 +36,27 @@ namespace Study_board.Business.Services.Interfaces
         /// <param name="projects">A collection of project view models to be added.</param>
         /// <returns>A list of <see cref="ProjectViewModel"/> that were added to the checklist.</returns>
         Task<IEnumerable<ProjectViewModel>> AddProjectsToChecklistAsync(Guid checklistId, Collection<ProjectCreateOrEditViewModel> projects);
+        
         /// <summary>
-        /// Assigns study points to projects within a checklist upon completion of the project.
+        /// Gets all projects associated with a specific user ID.
         /// </summary>
-        /// <param name="checklistId">The ID of the checklist.</param>
-        /// <param name="studyPoints">The number of study points to assign.</param>
-        /// <param name="isCompleted">Whether the project is completed.</param>
-        /// <param name="projectType">The type of the project.</param>
-        /// <returns>A list of updated project view models.</returns>
-        Task<IEnumerable<ProjectViewModel>> AssignStudyPointsUponCompletionAsync(Guid checklistId, bool isCompleted, ProjectType projectType);
-
+        /// <param name="userId">The unique identifier of the user.</param>
+        /// <returns>A list of <see cref="ProjectViewModel"/> associated with the specified user ID.</returns>
+        Task<IEnumerable<ProjectViewModel>> GetByUserIdAsync(string userId);
+        
+        /// <summary>
+        /// Marks a project as completed and assigns study points based on the project type.
+        /// </summary>
+        /// <param name="projectId">The unique identifier of the project to mark as completed.</param>
+        /// <returns>>The updated <see cref="ProjectViewModel"/> with assigned study points.</returns>
+        Task<ProjectViewModel> AssignStudyPointsUponCompletionAsync(Guid projectId);
+        
         /// <summary>
         /// Gets all projects.
         /// </summary>
         /// <returns>A list of <see cref="ProjectViewModel"/>.</returns>
         Task<IEnumerable<ProjectViewModel>> GetAllAsync();
+        
         /// <summary>
         /// Retrieves all projects associated with a specific checklist.
         /// </summary>
