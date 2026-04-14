@@ -18,7 +18,9 @@ namespace Study_board.Business.Mappings
         {
             CreateMap<Project, ProjectViewModel>()
                 .ForMember(m => m.Name, opt => opt.MapFrom(src => src.Name))
-                .ForMember(m => m.ChecklistTitle, opt => opt.MapFrom(src => src.Checklist.Title));
+                .ForMember(m => m.ChecklistTitle, opt => opt.MapFrom(src => src.Checklist.Title))
+                .ForMember(m => m.StudyPoints, opt => opt.MapFrom(src => src.StudyPoints))
+                .ForMember(m => m.ProjectType, opt => opt.MapFrom(src => src.ProjectType));
             CreateMap<ProjectCreateOrEditViewModel, Project>();
             CreateMap<Project, ProjectCreateOrEditViewModel>()
                 .ForMember(dest => dest.ChecklistId, opt => opt.MapFrom(src => src.ChecklistId));
