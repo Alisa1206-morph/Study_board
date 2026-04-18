@@ -174,12 +174,12 @@ namespace Study_board.Business.Services.Implementations
             return _mapper.Map<ProjectViewModel>(project);
         }
 
-        public async Task<ProjectViewModel> UpdateAsync(Guid ChecklistId, ProjectCreateOrEditViewModel model)
+        public async Task<ProjectViewModel> UpdateAsync(Guid id, ProjectCreateOrEditViewModel model)
         {
-            var project = await _projectRepository.GetByIdAsync(ChecklistId, p => p.Checklist);
+            var project = await _projectRepository.GetByIdAsync(id, p => p.Checklist);
             if (project == null)
             {
-                throw new KeyNotFoundException($"Project with ID {model.ChecklistId} not found.");
+                throw new KeyNotFoundException($"Project with ID {id} not found.");
             }
 
             _mapper.Map(model, project);
